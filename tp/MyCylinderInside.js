@@ -30,9 +30,9 @@
         
     for(var i = 0; i < this.slices; i++){
         this.vertices.push(Math.cos(last),Math.sin(last),height);
-        this.normals.push(Math.cos(last),Math.sin(last),0);
+        this.normals.push(-Math.cos(last),-Math.sin(last),0);
         this.vertices.push(Math.cos(last),Math.sin(last),height+z);
-        this.normals.push(Math.cos(last),Math.sin(last),0);
+        this.normals.push(-Math.cos(last),-Math.sin(last),0);
          this.texCoords.push(i/this.slices, s/this.stacks);
          this.texCoords.push((i+1)/this.slices, s/this.stacks);
          this.texCoords.push(i/this.slices, (s+1)/this.stacks);

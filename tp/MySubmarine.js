@@ -24,10 +24,12 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.vertBarb = new MyUnitCubeQuad(this.scene);
 	this.horBarb = new MyUnitCubeQuad(this.scene);
 	this.triangularBarb = new MyTriangularBase(this.scene);
-	//this.baseBarb = new MyTriangle(this.scene);
 
 	this.propeller = new MyCylinder(this.scene,8,7);
 	this.insideProp = new MyCylinderInside(this.scene,8,7);
+	this.rightProp = new MyUnitCubeQuad(this.scene);
+	this.leftProp = new MyUnitCubeQuad(this.scene);
+	this.middleProp = new MyLamp(this.scene,8,7);
 	this.initBuffers();
 };
 
@@ -163,7 +165,9 @@ MySubmarine.prototype.display = function () {
     	this.scene.scale(0.4,0.6,0.1);
 		this.triangularBarb.display();
     this.scene.popMatrix();
-
+	
+	//Propeller
+	//right (from the back of the submarine)
     this.scene.pushMatrix();
     	this.scene.translate(1,-0.4,3.9);
     	this.scene.scale(0.4,0.4,0.4);
@@ -172,11 +176,38 @@ MySubmarine.prototype.display = function () {
     this.scene.popMatrix();
 
     this.scene.pushMatrix();
+    	this.scene.translate(1,-0.4,4.1);
+    	this.scene.scale(0.6,0.2,0.1);	
+		this.rightProp.display();
+    this.scene.popMatrix();
+	
+	this.scene.pushMatrix();
+		this.scene.translate(1,-0.4,4);
+		this.scene.rotate(180*degToRad,1,0,0);
+		this.scene.scale(0.1,0.1,0.1);
+		this.middleProp.display();
+	this.scene.popMatrix();
+
+	//left
+    this.scene.pushMatrix();
     	this.scene.translate(-1,-0.4,3.9);
     	this.scene.scale(0.4,0.4,0.4);
 		this.propeller.display();
 		this.insideProp.display();
     this.scene.popMatrix();
+
+    this.scene.pushMatrix();
+    	this.scene.translate(-1,-0.4,4.1);
+    	this.scene.scale(0.6,0.2,0.1);	
+		this.leftProp.display();
+    this.scene.popMatrix();
+
+    this.scene.pushMatrix();
+		this.scene.translate(-1,-0.4,4);
+		this.scene.rotate(180*degToRad,1,0,0);
+		this.scene.scale(0.1,0.1,0.1);
+		this.middleProp.display();
+	this.scene.popMatrix();
     	
 };
 

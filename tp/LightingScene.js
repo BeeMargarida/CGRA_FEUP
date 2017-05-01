@@ -165,5 +165,5 @@ LightingScene.prototype.doSomething = function ()
 LightingScene.prototype.update = function(currTime){
 	this.clock.update(currTime);
 
-	//this.submarine.update();
+	this.submarine.update();
 }

@@ -18,29 +18,16 @@ MyTriangle.prototype.initBuffers = function () {
  		-0.5, 0.5, 0,
  	];
 
-<<<<<<< HEAD
-	this.indices = [
-            0, 1, 2, 
-        ];
-		
-	
-=======
+
  	this.indices = [
  		0, 1, 2,
  	];
->>>>>>> 8af7aa2cb301e0ff329c61a4d98c35c4d1295d58
 
- 	
-		
 	 this.normals = [
           0, 0, 1,
           0, 0, 1,
           0, 0, 1,
       ];
-<<<<<<< HEAD
-      
-	//this.primitiveType=this.scene.gl.TRIANGLES;
-=======
 
       this.texCoords = [
 		this.minS, this.maxT,
@@ -50,6 +37,5 @@ MyTriangle.prototype.initBuffers = function () {
       ];
 
 	this.primitiveType = this.scene.gl.TRIANGLES;
->>>>>>> 8af7aa2cb301e0ff329c61a4d98c35c4d1295d58
     this.initGLBuffers();
 };

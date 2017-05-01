@@ -37,7 +37,6 @@ LightingScene.prototype.init = function(application) {
 	this.pole = new MyCylinder(this,8,7);
 	this.clock = new MyClock(this,12,1);
 
-	this.quad = new MyQuad(this,0,1,0,1);
 	// Materials
 	this.materialDefault = new CGFappearance(this);
 
@@ -141,7 +140,7 @@ LightingScene.prototype.display = function() {
 		this.materialDefault.apply();
 	this.popMatrix();
 
-	this.pushMatrix();
+	/*this.pushMatrix();
 		this.translate(8,0,0);
 		this.rotate(-90*degToRad,1,0,0);
 		this.scale(0.2,0.2,4.1);
@@ -153,7 +152,7 @@ LightingScene.prototype.display = function() {
 		this.scale(1,1,0.2);
 		this.materialDefault.apply();
 		this.clock.display();
-	this.popMatrix();
+	this.popMatrix();*/
 
 	// ---- END Primitive drawing section
 };

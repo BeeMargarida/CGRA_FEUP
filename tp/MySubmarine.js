@@ -20,10 +20,14 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.periscopeTop = new MyCylinder(this.scene,8,7);
 	this.periscopeGlass = new MyCircle(this.scene,8);
 	this.periscopeBack = new MyCircle(this.scene,8);
-	this.vertBarb = new MyTrap(this.scene);
-	this.horBarb = new MyTrap(this.scene);
-	this.rightHel = new MyCylinder(this.scene,8,7);
-	this.insideHel = new MyCylinderInside(this.scene,8,7);
+
+	this.vertBarb = new MyUnitCubeQuad(this.scene);
+	this.horBarb = new MyUnitCubeQuad(this.scene);
+	this.triangularBarb = new MyTriangularBase(this.scene);
+	//this.baseBarb = new MyTriangle(this.scene);
+
+	this.propeller = new MyCylinder(this.scene,8,7);
+	this.insideProp = new MyCylinderInside(this.scene,8,7);
 	this.initBuffers();
 };
 
@@ -90,25 +94,36 @@ MySubmarine.prototype.display = function () {
     this.scene.popMatrix();
 
     this.scene.pushMatrix();
-    	this.scene.translate(0,1.5,4.6);
-    	this.scene.scale(0.1,3,0.4);
-    	this.scene.rotate(90*degToRad,1,0,0);
-    	this.scene.rotate(45*degToRad,0,0,1);
-    	this.vertBarb.display();
+    	this.scene.translate(0,0,4.6);
+    	this.scene.scale(0.1,2/*1.64*/,0.4);
+    	this.vertBarb.display();	
     this.scene.popMatrix();
 
-    /*this.scene.pushMatrix();
-    	this.scene.translate(0,1.5,4.6);
-    	this.scene.scale(0.1,3,0.4);
-    	this.scene.rotate(90*degToRad,0,0,1);
-		this.horBarb.display();
-    this.scene.popMatrix();*/
+    this.scene.pushMatrix();
+    	this.scene.translate(0,3,4.8);
+    	//this.scene.scale(0.4,0.35/*1.64*/,0.1);
+    	//this.scene.rotate(30*degToRad,0,0,1);
+		this.triangularBarb.display();
+    this.scene.popMatrix();
 
     this.scene.pushMatrix();
-    	this.scene.translate(1,0,4.3);
+    	this.scene.translate(0,0,4.6);
+    	this.scene.scale(1.64,0.1,0.4);
+		this.horBarb.display();
+    this.scene.popMatrix();
+
+    this.scene.pushMatrix();
+    	this.scene.translate(1.1,0,3.9);
     	this.scene.scale(0.4,0.4,0.4);
-		this.rightHel.display();
-		this.insideHel.display();
+		this.propeller.display();
+		this.insideProp.display();
+    this.scene.popMatrix();
+
+    this.scene.pushMatrix();
+    	this.scene.translate(-1.1,0,3.9);
+    	this.scene.scale(0.4,0.4,0.4);
+		this.propeller.display();
+		this.insideProp.display();
     this.scene.popMatrix();
     	
 };

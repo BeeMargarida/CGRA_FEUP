@@ -97,12 +97,11 @@ MySubmarine.prototype.display = function () {
     	this.vertBarb.display();
     this.scene.popMatrix();
 
-    /*this.scene.pushMatrix();
-    	this.scene.translate(0,1.5,4.6);
-    	this.scene.scale(0.1,3,0.4);
-    	this.scene.rotate(90*degToRad,0,0,1);
+    this.scene.pushMatrix();
+    	this.scene.scale(1.64,0.1,0.5);
+    	this.scene.rotate(45*degToRad,0,0,1);
 		this.horBarb.display();
-    this.scene.popMatrix();*/
+    this.scene.popMatrix();
 
     this.scene.pushMatrix();
     	this.scene.translate(1,0,4.3);

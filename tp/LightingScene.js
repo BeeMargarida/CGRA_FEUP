@@ -37,6 +37,7 @@ LightingScene.prototype.init = function(application) {
 	this.pole = new MyCylinder(this,8,7);
 	this.clock = new MyClock(this,12,1);
 
+	this.quad = new MyQuad(this,0,1,0,1);
 	// Materials
 	this.materialDefault = new CGFappearance(this);
 

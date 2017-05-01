@@ -5,6 +5,7 @@ function MyTrap(scene){
     this.scene = scene;
 	
     this.prism = new MyPrism(this.scene,4,1);
+    
 
     this.initBuffers();
 }
@@ -17,5 +18,5 @@ MyTrap.prototype.display = function () {
     this.scene.pushMatrix();
         this.prism.display();
     this.scene.popMatrix();
-
+  
 }

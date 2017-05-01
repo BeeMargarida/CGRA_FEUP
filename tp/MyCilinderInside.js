@@ -42,13 +42,13 @@
 
     var indice = s*2*this.slices;
     for(var i = 0; i < this.slices - 1; i++){
-        this.indices.push(indice, indice+2, indice+3);
-        this.indices.push(indice, indice+3,indice+1);        
+        this.indices.push(indice+3, indice+2, indice);
+        this.indices.push(indice+1, indice+3,indice);        
         indice += 2;
     }
     
-    this.indices.push(s*2*this.slices, indice+1,indice);
-    this.indices.push(s*2*this.slices+1, indice+1,s*2*this.slices);
+    this.indices.push(indice, indice+1,s*2*this.slices);
+    this.indices.push(s*2*this.slices, indice+1,s*2*this.slices+1);
     
 
     height += z;

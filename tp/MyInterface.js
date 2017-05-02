@@ -110,6 +110,7 @@ MyInterface.prototype.processKeyDown = function(event) {
 		case(69)://e
 		case(101):
 			this.scene.submarine.e = true;
+			this.scene.submarine.vertBarbAngle = -20;
 			break;
 		case (87)://w
 		case(119):
@@ -126,6 +127,7 @@ MyInterface.prototype.processKeyDown = function(event) {
 		case(113)://q
 		case(81):
 			this.scene.submarine.q = true;
+			this.scene.submarine.vertBarbAngle = 20;
 			break;
 		case(76): //l
 		case(108):
@@ -152,6 +154,7 @@ MyInterface.prototype.processKeyUp = function(event) {
 		case(69)://e
 		case(101):
 			this.scene.submarine.e = false;
+			this.scene.submarine.vertBarbAngle = 0;
 			break;
 		case (87):
 		case (119):
@@ -168,6 +171,7 @@ MyInterface.prototype.processKeyUp = function(event) {
 		case(113)://q
 		case(81):
 			this.scene.submarine.q = false;
+			this.scene.submarine.vertBarbAngle = 0;
 			break;
 		case(76): //l
 		case(108):

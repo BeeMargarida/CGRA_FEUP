@@ -33,6 +33,7 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.prop2 = new MyPropeller(this.scene);
 
 	this.barbAngle = 0;
+	this.vertBarbAngle = 0;
 
 
 	this.propeller = new MyCylinder(this.scene,8,7);
@@ -122,6 +123,7 @@ MySubmarine.prototype.display = function () {
     	this.scene.translate(0,0,2.3);
     	this.scene.scale(1.5,1,1);
     	this.scene.rotate(90*degToRad,0,0,1);
+    	this.scene.rotate(this.vertBarbAngle*degToRad,0,1,0);
 		this.barb.display();
     this.scene.popMatrix();
 
@@ -173,10 +175,10 @@ MySubmarine.prototype.update = function(currTime) {
     	 this.peri.lowerPeriscope();
     }
     if(this.q === true){
-    	this.vertAngle += 0.1;
+    	this.vertAngle += 5*Math.PI/180;
     }
     if(this.e === true){
-    	this.vertAngle -= 0.1;
+    	this.vertAngle -= 5*Math.PI/180;
     }
     this.x -= this.speed*Math.sin(this.angle);
     this.y += this.speed*Math.sin(this.vertAngle);

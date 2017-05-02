@@ -5,6 +5,7 @@ function MyPropeller(scene){
     this.scene = scene;
 
     this.angle = 0;
+    this.speed = 1/25;
 
     this.propCyl = new MyCylinder(this.scene,8,7);
 	this.propCylIn = new MyCylinderInside(this.scene,8,7);
@@ -26,8 +27,9 @@ MyPropeller.prototype.display = function () {
 
     this.scene.pushMatrix();
     	this.scene.translate(0,0,0.2);
-    	this.scene.scale(0.6,0.2,0.1);
+    	
     	this.scene.rotate(this.angle*degToRad,0,0,1);
+    	this.scene.scale(0.6,0.2,0.1);
 		this.propHel.display();
     this.scene.popMatrix();
 	
@@ -39,6 +41,11 @@ MyPropeller.prototype.display = function () {
 	this.scene.popMatrix();
 }
 
-MyPropeller.prototype.update = function () {
-    this.angle += 10;
+MyPropeller.prototype.updateLeft = function (deltaTime, speed) {
+	this.angle += deltaTime*speed*2*Math.PI;
+	console.log(this.angle);
+}
+
+MyPropeller.prototype.updateRight = function (deltaTime, speed) {
+    this.angle -= deltaTime*speed*2*Math.PI;
 }

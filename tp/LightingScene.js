@@ -128,6 +128,7 @@ LightingScene.prototype.display = function() {
 	this.pushMatrix();
 		this.translate(this.submarine.x,this.submarine.y+2,this.submarine.z);
 		this.rotate(this.submarine.angle,0,1,0);
+		this.rotate(this.submarine.vertAngle,1,0,0);
 		this.submarine.display();
 	this.popMatrix();
 
@@ -140,7 +141,7 @@ LightingScene.prototype.display = function() {
 		this.materialDefault.apply();
 	this.popMatrix();
 
-	/*this.pushMatrix();
+	this.pushMatrix();
 		this.translate(8,0,0);
 		this.rotate(-90*degToRad,1,0,0);
 		this.scale(0.2,0.2,4.1);
@@ -152,7 +153,7 @@ LightingScene.prototype.display = function() {
 		this.scale(1,1,0.2);
 		this.materialDefault.apply();
 		this.clock.display();
-	this.popMatrix();*/
+	this.popMatrix();
 
 	// ---- END Primitive drawing section
 };
@@ -164,5 +165,5 @@ LightingScene.prototype.doSomething = function ()
 LightingScene.prototype.update = function(currTime){
 	this.clock.update(currTime);
 
-	this.submarine.update();
+	this.submarine.update(currTime);
 }

@@ -96,10 +96,16 @@ MyInterface.prototype.processKeyDown = function(event) {
 		case (65):
 		case (97):	//a
 			this.scene.submarine.a = true;	
+			this.scene.submarine.barbAngle = -20;
 			break;
 		case (68)://d
 		case (100):
 			this.scene.submarine.d = true;
+			this.scene.submarine.barbAngle = 20;
+			break;
+		case(69)://e
+		case(101):
+			this.scene.submarine.e = true;
 			break;
 		case (87)://w
 		case(119):
@@ -109,6 +115,19 @@ MyInterface.prototype.processKeyDown = function(event) {
 		case(115):
 			this.scene.submarine.s = true;
 			break;
+		case(112)://p
+		case(80):
+			this.scene.submarine.p = true;
+			break;
+		case(113)://q
+		case(81):
+			this.scene.submarine.q = true;
+			break;
+		case(76): //l
+		case(108):
+			this.scene.submarine.l = true;
+			break;
+
 	};
 };
 
@@ -119,10 +138,16 @@ MyInterface.prototype.processKeyUp = function(event) {
 		case (65):	//a
 		case (97):
 			this.scene.submarine.a = false;
+			this.scene.submarine.barbAngle = 0;
 			break;
 		case (68):
 		case (100):
 			this.scene.submarine.d = false;
+			this.scene.submarine.barbAngle = 0;
+			break;
+		case(69)://e
+		case(101):
+			this.scene.submarine.e = false;
 			break;
 		case (87):
 		case (119):
@@ -131,6 +156,18 @@ MyInterface.prototype.processKeyUp = function(event) {
 		case(83):
 		case (115):
 			this.scene.submarine.s = false;
+			break;
+		case(112)://p
+		case(80):
+			this.scene.submarine.p = false;
+			break;
+		case(113)://q
+		case(81):
+			this.scene.submarine.q = false;
+			break;
+		case(76): //l
+		case(108):
+			this.scene.submarine.l = false;
 			break;
 	};
 };

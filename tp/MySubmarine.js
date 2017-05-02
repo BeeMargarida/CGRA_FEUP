@@ -15,8 +15,11 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.e = false;
 	this.p = false;
 	this.l = false;
-	this.speed = 0.0;
+	this.speed = 0.1;
+	this.vertAngle = 0;
 
+	var d = new Date();
+	this.startTime = d.getTime();
 
 	this.cylinderBody = new MyCylinder(this.scene,8,7);
 	this.frontBumper = new MyLamp(this.scene, 8,7);
@@ -25,8 +28,11 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.towerTop = new MyCircle(this.scene,8);
 
 	this.barb = new MyTrap(this.scene);
-	this.peri = new MyPeriscope(this.scene, 3);
-	this.prop = new MyPropeller(this.scene);
+	this.peri = new MyPeriscope(this.scene);
+	this.prop1 = new MyPropeller(this.scene);
+	this.prop2 = new MyPropeller(this.scene);
+
+	this.barbAngle = 0;
 
 
 	this.propeller = new MyCylinder(this.scene,8,7);
@@ -83,14 +89,15 @@ MySubmarine.prototype.display = function () {
 
 	//barbatana vertical de tras
    	this.scene.pushMatrix();
-		this.scene.translate(0,0,2.6);
+		this.scene.translate(0,0,2.3);
 		this.scene.scale(1,1.5,1);
+		this.scene.rotate(this.barbAngle*degToRad,0,1,0);
 		this.barb.display();
 	this.scene.popMatrix();
 
 	//barbatana horizontal de tras
     this.scene.pushMatrix();
-    	this.scene.translate(0,0,2.6);
+    	this.scene.translate(0,0,2.3);
     	this.scene.scale(1.5,1,1);
     	this.scene.rotate(90*degToRad,0,0,1);
 		this.barb.display();
@@ -98,7 +105,7 @@ MySubmarine.prototype.display = function () {
 
 	//barbatana horizontal da frente
   	this.scene.pushMatrix();
-    	this.scene.translate(0,1.2,0.1);
+    	this.scene.translate(0,1.2,0.3);
     	this.scene.rotate(90*degToRad,0,0,1);
     	this.scene.rotate(180*degToRad,1,0,0);
 		this.barb.display();
@@ -108,20 +115,25 @@ MySubmarine.prototype.display = function () {
 	//right
 	this.scene.pushMatrix();
 		this.scene.translate(1,-0.4,1.9);
-		this.prop.display();
+		this.prop1.display();
 	this.scene.popMatrix();
 
 	//left
     this.scene.pushMatrix();
 		this.scene.translate(-1,-0.4,1.9);
-		this.prop.display();
+		this.prop2.display();
 	this.scene.popMatrix();
 };
 
-MySubmarine.prototype.update = function() {
-	this.prop.update();
+MySubmarine.prototype.update = function(currTime) {
+	var deltaTime = currTime - this.startTime;
+	this.startTime = currTime;
+	this.prop1.updateLeft(deltaTime, this.speed);
+	this.prop2.updateRight(deltaTime, this.speed);
     if(this.a === true){
-       this.angle += 5*Math.PI/180;
+		this.angle += 5*Math.PI/180;
+		console.log('BarbAngle');
+		console.log(this.barbAngle);
     }
     if(this.d === true){
         this.angle -= 5*Math.PI/180;
@@ -132,6 +144,19 @@ MySubmarine.prototype.update = function() {
     if(this.s === true){
         this.speed -= 0.05;
     }
+    if(this.p === true){
+    	this.peri.elevatePeriscope();
+    }
+    if(this.l === true){
+    	 this.peri.lowerPeriscope();
+    }
+    if(this.q === true){
+    	this.vertAngle += 0.1;
+    }
+    if(this.e === true){
+    	this.vertAngle -= 0.1;
+    }
     this.x -= this.speed*Math.sin(this.angle);
+    this.y += this.speed*Math.sin(this.vertAngle);
     this.z -= this.speed*Math.cos(this.angle);
 }

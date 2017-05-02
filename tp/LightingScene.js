@@ -30,6 +30,7 @@ LightingScene.prototype.init = function(application) {
 
 	this.light1=true; this.light2=true; this.light3=true; this.speed=3;
 	this.pause = false;
+	this.currSubmarineAppearance = 0;
 
 	// Scene elements
 	this.submarine = new MySubmarine(this,8,0,7.5,180*Math.PI/180);
@@ -43,6 +44,9 @@ LightingScene.prototype.init = function(application) {
 	this.oceanAppearance = new CGFappearance(this);
 	this.oceanAppearance.loadTexture("../resources/images/ocean.jpg");
 	this.oceanAppearance.setTextureWrap('REPEAT','REPEAT');
+
+	//Submarine textures
+	this.submarineAppearanceList = ['metal','wood','wool'];
 
 	this.enableTextures(true);
 	this.setUpdatePeriod(100);
@@ -163,7 +167,15 @@ LightingScene.prototype.doSomething = function ()
 
 
 LightingScene.prototype.update = function(currTime){
+	if(this.currSubmarineAppearance == 'metal'){
+		this.submarine.textIndex = 0;
+	}
+	else if(this.currSubmarineAppearance == 'wood'){
+		this.submarine.textIndex = 1;
+	}
+	else if(this.currSubmarineAppearance == 'wool'){
+		this.submarine.textIndex = 2;
+	}
 	this.clock.update(currTime);
-
 	this.submarine.update(currTime);
 }

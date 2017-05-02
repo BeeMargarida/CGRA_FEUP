@@ -49,6 +49,10 @@ MyInterface.prototype.init = function(application) {
 	group.open();
 	group.add(this.scene, 'pause');
 	
+
+	//Textures
+	this.gui.add(this.scene, 'currSubmarineAppearance', this.scene.submarineAppearanceList);
+	
 	// add a slider
 	// must be a numeric variable of the scene, initialized in scene.init e.g.
 	// this.speed=3;

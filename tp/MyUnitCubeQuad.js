@@ -45,7 +45,7 @@ MyUnitCubeQuad.prototype.display = function() { //visualizado com eixo z para ci
  function MyUnitCubeQuad(scene) {
  	CGFobject.call(this, scene);
 
- 	this.quad = new MyQuad(this.scene);
+ 	this.quad = new MyQuad(this.scene,0,1,0,1);
  };
 
  MyUnitCubeQuad.prototype = Object.create(CGFobject.prototype);

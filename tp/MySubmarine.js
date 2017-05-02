@@ -40,6 +40,28 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.rightProp = new MyUnitCubeQuad(this.scene);
 	this.leftProp = new MyUnitCubeQuad(this.scene);
 	this.middleProp = new MyLamp(this.scene,8,7);
+
+	//textures
+	this.submarineAppearances = [];
+
+	this.aluminium = new CGFappearance(this.scene);
+	this.aluminium.loadTexture("../resources/images/metal.png");
+	//this.aluminium.setTextureWrap('REPEAT','REPEAT');
+	this.submarineAppearances.push(this.aluminium);
+
+	this.wood = new CGFappearance(this.scene);
+	this.wood.loadTexture("../resources/images/table.png");
+	this.wood.setTextureWrap('REPEAT','REPEAT');
+	this.submarineAppearances.push(this.wood);
+
+	this.wool = new CGFappearance(this.scene);
+	this.wool.loadTexture("../resources/images/wool.png");
+	this.wool.setTextureWrap('REPEAT','REPEAT');
+	this.submarineAppearances.push(this.wool);
+
+	this.textIndex = 0;
+
+	this.materialDefault = new CGFappearance(this.scene);
 	this.initBuffers();
 };
 
@@ -47,7 +69,7 @@ MySubmarine.prototype = Object.create(CGFobject.prototype);
 MySubmarine.prototype.constructor=MySubmarine;
 
 MySubmarine.prototype.display = function () {
-	
+	this.submarineAppearances[this.textIndex].apply();
 	this.scene.pushMatrix();
 		this.scene.translate(0,0,-2);
 		this.scene.scale(0.73,1,4.08);

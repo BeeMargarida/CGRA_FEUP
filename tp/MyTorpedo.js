@@ -7,6 +7,8 @@ function MyTorpedo(scene,x,y,z,angle) {
     this.z = z;
     this.angle = angle;
 
+    this.target = null;
+
     this.cylinderBody = new MyCylinder(this.scene,8,7);
 	this.frontBumper = new MyLamp(this.scene, 8,7);
 	this.rearBumper = new MyLamp(this.scene, 8,7);
@@ -55,4 +57,12 @@ MyTorpedo.prototype.display = function () {
     	//this.scene.rotate(this.vertBarbAngle*degToRad,0,1,0);
 		this.barb.display();
     this.scene.popMatrix();
+}
+
+
+MyTorpedo.prototype.update = function () {
+	this.p1 = [this.x, this.y, this.z];
+	this.p2 = [this.x, this.y, this.z + 6]; //just to test, not like this
+	this.p3 = [this.target.x, this.target.y + 3, this.target.z];
+	this.p4 = [this.target.x, this.target.y, this.target.z];
 }

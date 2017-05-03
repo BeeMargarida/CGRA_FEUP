@@ -42,6 +42,8 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.leftProp = new MyUnitCubeQuad(this.scene);
 	this.middleProp = new MyLamp(this.scene,8,7);
 
+	this.torpedo = new MyTorpedo(this.scene,this.x,this.y,this.z,0);
+
 	//textures
 	this.submarineAppearances = [];
 
@@ -146,6 +148,11 @@ MySubmarine.prototype.display = function () {
     this.scene.pushMatrix();
 		this.scene.translate(-1,-0.4,1.9);
 		this.prop2.display();
+	this.scene.popMatrix();
+
+	//torpedo
+	this.scene.pushMatrix();
+		this.torpedo.display();
 	this.scene.popMatrix();
 };
 

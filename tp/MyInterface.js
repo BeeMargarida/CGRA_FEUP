@@ -89,6 +89,10 @@ MyInterface.prototype.processKeyboard = function(event) {
 		case(115):
 			console.log("Key 'S' pressed");
 			break;
+		case(70)://f
+		case(102):
+			this.scene.submarine.createTorpedo = true;
+			break;
 	};
 };
 
@@ -133,7 +137,6 @@ MyInterface.prototype.processKeyDown = function(event) {
 		case(108):
 			this.scene.submarine.l = true;
 			break;
-
 	};
 };
 

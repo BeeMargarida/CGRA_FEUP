@@ -2,6 +2,10 @@ var degToRad = Math.PI / 180.0;
 
 function MyTorpedo(scene,x,y,z,angle) {
     CGFobject.call(this,scene);
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.angle = angle;
 
     this.cylinderBody = new MyCylinder(this.scene,8,7);
 	this.frontBumper = new MyLamp(this.scene, 8,7);

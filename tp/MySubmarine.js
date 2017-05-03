@@ -157,15 +157,17 @@ MySubmarine.prototype.display = function () {
 	this.scene.popMatrix();
 
 	//torpedo
-	if(this.createTorpedo === true){
+	/*if(this.createTorpedo === true){
 		this.temp = new MyTorpedo(this.scene,this.x,this.y,this.z,0);
 	   	this.temp.target = this.scene.targets[0];
+	   	this.temp.updatePoints();
 	   	//this.torpedo.push(new MyTorpedo(this.scene,this.x,this.y,this.z,0));
 	   	this.torpedo.push(this.temp);
 	   	this.createTorpedo = false;
-	}
+	}*/
 	for(var i = 0; i < this.torpedo.length; i++){
 		this.scene.pushMatrix();
+			this.scene.translate(this.torpedo[i].x, this.torpedo[i].y, this.torpedo[i].z);
 			this.torpedo[i].display();
 		this.scene.popMatrix();
 	}
@@ -178,8 +180,6 @@ MySubmarine.prototype.update = function(currTime) {
 	this.prop2.updateRight(deltaTime, this.speed);
     if(this.a === true){
 		this.angle += 5*Math.PI/180;
-		console.log('BarbAngle');
-		console.log(this.barbAngle);
     }
     if(this.d === true){
         this.angle -= 5*Math.PI/180;
@@ -206,6 +206,14 @@ MySubmarine.prototype.update = function(currTime) {
     this.y += this.speed*Math.sin(this.vertAngle);
     this.z -= this.speed*Math.cos(this.angle);
 	
+	if(this.createTorpedo === true){
+		this.temp = new MyTorpedo(this.scene,this.x,this.y,this.z,0);
+	   	this.temp.target = this.scene.targets[0];
+	   	this.temp.updatePoints();
+	   	//this.torpedo.push(new MyTorpedo(this.scene,this.x,this.y,this.z,0));
+	   	this.torpedo.push(this.temp);
+	   	this.createTorpedo = false;
+	}
     for(var i = 0; i < this.torpedo.length; i++){
     	this.torpedo[i].update();
     }

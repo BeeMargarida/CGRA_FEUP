@@ -15,7 +15,7 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.e = false;
 	this.p = false;
 	this.l = false;
-	this.speed = 0.1;
+	this.speed = 0.0;
 	this.vertAngle = 0;
 
 	var d = new Date();
@@ -59,6 +59,11 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.wool.loadTexture("../resources/images/wool.png");
 	this.wool.setTextureWrap('REPEAT','REPEAT');
 	this.submarineAppearances.push(this.wool);
+
+	this.camo = new CGFappearance(this.scene);
+	this.camo.loadTexture("../resources/images/camo.png");
+	this.camo.setTextureWrap('REPEAT','REPEAT');
+	this.submarineAppearances.push(this.camo);
 
 	this.textIndex = 0;
 

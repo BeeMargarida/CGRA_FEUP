@@ -169,6 +169,7 @@ MySubmarine.prototype.display = function () {
 		this.scene.pushMatrix();
 			this.scene.translate(this.torpedo[i].x, this.torpedo[i].y, this.torpedo[i].z);
 			this.torpedo[i].display();
+			console.log(this.torpedo[0].x);
 		this.scene.popMatrix();
 	}
 };
@@ -207,7 +208,7 @@ MySubmarine.prototype.update = function(currTime) {
     this.z -= this.speed*Math.cos(this.angle);
 	
 	if(this.createTorpedo === true){
-		this.temp = new MyTorpedo(this.scene,this.x,this.y,this.z,0);
+		this.temp = new MyTorpedo(this.scene,this.x,this.y-0.8,this.z,this.angle,this.vertAngle);
 	   	this.temp.target = this.scene.targets[0];
 	   	this.temp.updatePoints();
 	   	//this.torpedo.push(new MyTorpedo(this.scene,this.x,this.y,this.z,0));

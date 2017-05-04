@@ -23,7 +23,8 @@ MyTarget.prototype.display = function () {
 
     this.scene.pushMatrix();
         this.scene.translate(this.x, this.y, this.z);
-        this.scene.scale(1,1,0.05);
+        //this.scene.scale(1,1,0.05);
+        //this.scene.rotate(90*degToRad,1,0,0);
         this.app.apply();
         this.cube.display();
     this.scene.popMatrix();

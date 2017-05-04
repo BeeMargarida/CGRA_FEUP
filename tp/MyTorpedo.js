@@ -1,11 +1,12 @@
 var degToRad = Math.PI / 180.0;
 
-function MyTorpedo(scene,x,y,z,angle) {
+function MyTorpedo(scene,x,y,z,angle,vertAngle) {
     CGFobject.call(this,scene);
     this.x = x;
     this.y = y;
     this.z = z;
     this.angle = angle;
+    this.vertAngle = vertAngle;
 
     this.target = null;
     this.time = 0;
@@ -34,31 +35,31 @@ MyTorpedo.prototype.constructor=MyTorpedo;
 MyTorpedo.prototype.display = function () {
 
     this.scene.pushMatrix();
-		this.scene.translate(-this.x,this.y-1.5,-this.z);
-		//this.scene.translate(this.x,this.y-1.5,this.z);
+		//this.scene.translate(0,0,0);
+		this.scene.translate(this.x,this.y,this.z);
 		this.scene.scale(0.2,0.2,2);
 		this.cylinderBody.display();
     this.scene.popMatrix();
 
     this.scene.pushMatrix();
-    	this.scene.translate(-this.x,-1.5,-this.z);
-    	//this.scene.translate(this.x,this.y-1.5,this.z);
+    	//this.scene.translate(0,0,0);
+    	this.scene.translate(this.x,this.y,this.z);
     	this.scene.rotate(180*degToRad,0,1,0);
     	this.scene.scale(0.2,0.2,0.2);
 		this.frontBumper.display();
     this.scene.popMatrix();
 
     this.scene.pushMatrix();
-    	this.scene.translate(-this.x,-1.5,-this.z + 2);
-    	//this.scene.translate(this.x,this.y-1.5,this.z);
+    	//this.scene.translate(0,0,2);
+    	this.scene.translate(this.x,this.y,this.z);
     	this.scene.scale(0.2,0.2,0.2);
 		this.rearBumper.display();
     this.scene.popMatrix();
 
     //barbatana vertical de tras
    	this.scene.pushMatrix();
-		this.scene.translate(-this.x,-1.5,-this.z + 2);
-		//this.scene.translate(this.x,this.y-1.5,this.z+2);
+		//this.scene.translate(0,0,2);
+		this.scene.translate(this.x,this.y,this.z+2);
 		this.scene.scale(0.5,0.35,0.3);
 		//this.scene.rotate(this.barbAngle*degToRad,0,1,0);
 		this.barb.display();
@@ -66,8 +67,8 @@ MyTorpedo.prototype.display = function () {
 
 	//barbatana horizontal de tras
     this.scene.pushMatrix();
-    	this.scene.translate(-this.x,-1.5,-this.z + 2);
-    	//this.scene.translate(this.x,this.y-1.5,this.z+2);
+    	//this.scene.translate(0,0,2);
+    	this.scene.translate(this.x,this.y,this.z+2);
     	this.scene.scale(0.35,0.5,0.3);
     	this.scene.rotate(90*degToRad,0,0,1);
     	//this.scene.rotate(this.vertBarbAngle*degToRad,0,1,0);
@@ -91,7 +92,9 @@ MyTorpedo.prototype.bezier = function(time) {
 
 MyTorpedo.prototype.updatePoints = function() {
 	this.p1 = [this.x, this.y, this.z];
-	this.p2 = [this.x, this.y, this.z + 6]; //just to test, not like this
+	//this.p2 = [(this.x)*Math.sin(this.angle)+6, (this.y+6)*Math.sin(this.vertAngle), (this.z)*Math.cos(this.angle)+6];
+	//this.p2 = [(this.x + 6*Math.sin(this.angle)),(this.y+6*Math.sin(this.vertAngle)),(this.z+6*Math.cos(this.angle))];
+	this.p2 = [(this.x+6)*Math.sin(this.angle),(this.y +6)*Math.sin(this.vertAngle),(this.z + 6)*Math.cos(this.angle)];
 	this.p3 = [this.target.x, this.target.y + 3, this.target.z];
 	this.p4 = [this.target.x, this.target.y, this.target.z];
 }
@@ -101,9 +104,9 @@ MyTorpedo.prototype.update = function () {
 		this.qb = this.bezier(this.time);
 		this.time += 0.01;
 		/*console.log("fack");
-		console.log(this.qb[0]);
+		console.log(this.qb[0]);*/
 		this.x = this.qb[0];
 		this.y = this.qb[1];
-		this.z = this.qb[2];*/
+		this.z = this.qb[2];
 	}
 }

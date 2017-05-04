@@ -39,8 +39,8 @@ LightingScene.prototype.init = function(application) {
 	this.clock = new MyClock(this,12,1);
 
 	this.targets = [];
+	this.targets.push(new MyTarget(this, 5,0.5,15));
 	this.targets.push(new MyTarget(this, 0.5,0.5,0.5));
-	this.targets.push(new MyTarget(this, 10,0.5,5));
 	
 
 	// Materials

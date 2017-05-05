@@ -38,11 +38,6 @@ LightingScene.prototype.init = function(application) {
 	this.pole = new MyCylinder(this,8,7);
 	this.clock = new MyClock(this,12,1);
 
-	this.targets = [];
-	this.targets.push(new MyTarget(this, 5,0.5,15));
-	this.targets.push(new MyTarget(this, 0.5,0.5,0.5));
-	
-
 	// Materials
 	this.materialDefault = new CGFappearance(this);
 
@@ -53,8 +48,14 @@ LightingScene.prototype.init = function(application) {
 	//Submarine textures
 	this.submarineAppearanceList = ['metal','wood','wool','camo','metallica'];
 	
+	//Targets
+	this.targets = [];
+	this.targets.push(new MyTarget(this, 5,0.5,15));
+	this.targets.push(new MyTarget(this, 0.5,0.5,0.5));
 	this.target = 0;
+	this.targetIndice = 0;
 	this.targetList = ['target1','target2'];
+
 	this.enableTextures(true);
 	this.setUpdatePeriod(100);
 };
@@ -194,9 +195,9 @@ LightingScene.prototype.update = function(currTime){
 	}	
 
 	if(this.target === 'target1')
-		this.submarine.target = 'target1';
+		this.submarine.targetIndice = 0;
 	else if(this.target === 'target2')
-		this.submarine.target = 'target2';
+		this.submarine.targetIndice = 1;
 		
 	this.clock.update(currTime);
 	this.submarine.update(currTime);	

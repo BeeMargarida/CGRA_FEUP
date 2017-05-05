@@ -20,7 +20,7 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.createTorpedo = false;
 
 
-	this.target = 0;
+	this.targetIndice = 0;
 
 	
 	var d = new Date();
@@ -216,7 +216,7 @@ MySubmarine.prototype.update = function(currTime) {
 	if(this.createTorpedo === true){
 		this.temp = new MyTorpedo(this.scene,this.x,this.y,this.z,this.angle,this.vertAngle);
 	   	//this.temp.target = this.scene.targets[0];
-	   	this.temp.target = this.target;
+	   	this.temp.target = this.scene.targets[this.targetIndice];
 	   	this.temp.updatePoints();
 	   	this.torpedo.push(this.temp);
 	   	this.createTorpedo = false;

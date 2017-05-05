@@ -99,9 +99,7 @@ MyTorpedo.prototype.bezier = function(time) {
 
 MyTorpedo.prototype.updatePoints = function() {
 	this.p1 = [this.x, this.y, this.z];
-	//this.p2 = [(this.x)*Math.sin(this.angle)+6, (this.y+6)*Math.sin(this.vertAngle), (this.z)*Math.cos(this.angle)+6];
-	//this.p2 = [(this.x + 6*Math.sin(this.angle)),(this.y+6*Math.sin(this.vertAngle)),(this.z+6*Math.cos(this.angle))];
-	this.p2 = [(this.x+6)*Math.sin(this.angle),(this.y +6)*Math.sin(this.vertAngle),(this.z + 6)*Math.cos(this.angle)];
+	this.p2 = [this.x+6*Math.cos(this.angle + Math.PI/2),this.y +6*Math.sin(this.vertAngle),this.z - 6*Math.sin(this.angle + Math.PI/2)];
 	this.p3 = [this.target.x, this.target.y + 3, this.target.z];
 	this.p4 = [this.target.x, this.target.y, this.target.z];
 }

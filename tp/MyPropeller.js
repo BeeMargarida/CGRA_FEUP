@@ -43,7 +43,6 @@ MyPropeller.prototype.display = function () {
 
 MyPropeller.prototype.updateLeft = function (deltaTime, speed) {
 	this.angle += deltaTime*speed*2*Math.PI;
-	console.log(this.angle);
 }
 
 MyPropeller.prototype.updateRight = function (deltaTime, speed) {

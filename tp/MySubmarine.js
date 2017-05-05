@@ -19,6 +19,10 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.vertAngle = 0;
 	this.createTorpedo = false;
 
+
+	this.target = 0;
+
+	
 	var d = new Date();
 	this.startTime = d.getTime();
 
@@ -67,6 +71,11 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.camo.loadTexture("../resources/images/camo.png");
 	this.camo.setTextureWrap('REPEAT','REPEAT');
 	this.submarineAppearances.push(this.camo);
+
+	this.metallica = new CGFappearance(this.scene);
+	this.metallica.loadTexture("../resources/images/metal.jpg");
+	this.metallica.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
+	this.submarineAppearances.push(this.metallica);
 
 	this.textIndex = 0;
 
@@ -183,10 +192,10 @@ MySubmarine.prototype.update = function(currTime) {
         this.angle -= 5*Math.PI/180;
     }
     if(this.w === true){
-    	this.speed += 0.05;    
+    	this.speed += 0.05*this.scene.speed;    
     }
     if(this.s === true){
-        this.speed -= 0.05;
+        this.speed -= 0.05*this.scene.speed;
     }
     if(this.p === true){
     	this.peri.elevatePeriscope();
@@ -206,7 +215,8 @@ MySubmarine.prototype.update = function(currTime) {
 	
 	if(this.createTorpedo === true){
 		this.temp = new MyTorpedo(this.scene,this.x,this.y,this.z,this.angle,this.vertAngle);
-	   	this.temp.target = this.scene.targets[0];
+	   	//this.temp.target = this.scene.targets[0];
+	   	this.temp.target = this.target;
 	   	this.temp.updatePoints();
 	   	this.torpedo.push(this.temp);
 	   	this.createTorpedo = false;

@@ -6,6 +6,8 @@ function MyTarget(scene, x, y, z){
     this.x = x; 
     this.y = y;
     this.z = z;
+
+    this.explosion = 0;
     
     this.cube = new MyUnitCubeQuad(this.scene,0,1,0,1);
 
@@ -13,6 +15,10 @@ function MyTarget(scene, x, y, z){
 	this.app.loadTexture("../resources/images/target.png");
 	this.app.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
 
+  	this.exp = new CGFappearance(this.scene);
+	this.exp.loadTexture("../resources/images/explosion.jpg");
+	this.exp.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
+    
     this.initBuffers();
 }
 
@@ -23,9 +29,18 @@ MyTarget.prototype.display = function () {
 
     this.scene.pushMatrix();
         this.scene.translate(this.x, this.y, this.z);
-        //this.scene.scale(1,1,0.05);
-        //this.scene.rotate(90*degToRad,1,0,0);
-        this.app.apply();
+        if(this.explosion !== 0 && this.explosion <= 2){
+        	this.exp.apply();
+        	this.scene.scale(this.explosion,this.explosion,this.explosion);
+        	this.explosion += 1;
+        }
+        else
+        	this.app.apply();
         this.cube.display();
     this.scene.popMatrix();
+}
+
+MyTarget.prototype.explode = function () {
+	this.cube = new MyLamp(this.scene,8,1);
+	this.explosion = 1;
 }

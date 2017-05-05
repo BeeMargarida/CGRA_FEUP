@@ -80,6 +80,10 @@ MySubmarine.prototype.constructor=MySubmarine;
 MySubmarine.prototype.display = function () {
 	this.submarineAppearances[this.textIndex].apply();
 	this.scene.pushMatrix();
+		this.scene.translate(this.x,this.y+2,this.z);
+		this.scene.rotate(this.angle,0,1,0);
+		this.scene.rotate(this.vertAngle,1,0,0);
+	this.scene.pushMatrix();
 		this.scene.translate(0,0,-2);
 		this.scene.scale(0.73,1,4.08);
 		this.cylinderBody.display();
@@ -155,21 +159,14 @@ MySubmarine.prototype.display = function () {
 		this.scene.translate(-1,-0.4,1.9);
 		this.prop2.display();
 	this.scene.popMatrix();
-
-	//torpedo
-	/*if(this.createTorpedo === true){
-		this.temp = new MyTorpedo(this.scene,this.x,this.y,this.z,0);
-	   	this.temp.target = this.scene.targets[0];
-	   	this.temp.updatePoints();
-	   	//this.torpedo.push(new MyTorpedo(this.scene,this.x,this.y,this.z,0));
-	   	this.torpedo.push(this.temp);
-	   	this.createTorpedo = false;
-	}*/
+	this.scene.popMatrix();
+	
 	for(var i = 0; i < this.torpedo.length; i++){
 		this.scene.pushMatrix();
-			this.scene.translate(this.torpedo[i].x, this.torpedo[i].y, this.torpedo[i].z);
+			//this.scene.translate(this.torpedo[i].x, this.torpedo[i].y, this.torpedo[i].z);
 			this.torpedo[i].display();
-			console.log(this.torpedo[0].x);
+			/*console.log("z");
+			console.log(this.torpedo[0].z);*/
 		this.scene.popMatrix();
 	}
 };
@@ -208,10 +205,9 @@ MySubmarine.prototype.update = function(currTime) {
     this.z -= this.speed*Math.cos(this.angle);
 	
 	if(this.createTorpedo === true){
-		this.temp = new MyTorpedo(this.scene,this.x,this.y-0.8,this.z,this.angle,this.vertAngle);
+		this.temp = new MyTorpedo(this.scene,this.x,this.y,this.z,this.angle,this.vertAngle);
 	   	this.temp.target = this.scene.targets[0];
 	   	this.temp.updatePoints();
-	   	//this.torpedo.push(new MyTorpedo(this.scene,this.x,this.y,this.z,0));
 	   	this.torpedo.push(this.temp);
 	   	this.createTorpedo = false;
 	}

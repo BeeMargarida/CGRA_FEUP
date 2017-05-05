@@ -26,7 +26,7 @@ function MyTorpedo(scene,x,y,z,angle,vertAngle) {
 	this.p3 = [this.target.x, this.target.y + 3, this.target.z];
 	this.p4 = [this.target.x, this.target.y, this.target.z];*/
 
-    this.initBuffers();
+    //this.initBuffers();
 }
 
 MyTorpedo.prototype = Object.create(CGFobject.prototype);
@@ -34,32 +34,37 @@ MyTorpedo.prototype.constructor=MyTorpedo;
 
 MyTorpedo.prototype.display = function () {
 
+this.scene.pushMatrix();
+	this.scene.translate(this.x,this.y,this.z);
+	this.scene.rotate(this.angle,0,1,0);
+	this.scene.rotate(this.vertAngle,1,0,0);
+    
     this.scene.pushMatrix();
 		//this.scene.translate(0,0,0);
-		this.scene.translate(this.x,this.y,this.z);
+		//this.scene.translate(-this.x,this.y,-this.z);
 		this.scene.scale(0.2,0.2,2);
 		this.cylinderBody.display();
     this.scene.popMatrix();
 
     this.scene.pushMatrix();
     	//this.scene.translate(0,0,0);
-    	this.scene.translate(this.x,this.y,this.z);
+    	//this.scene.translate(-this.x,this.y,-this.z);
     	this.scene.rotate(180*degToRad,0,1,0);
     	this.scene.scale(0.2,0.2,0.2);
 		this.frontBumper.display();
     this.scene.popMatrix();
 
     this.scene.pushMatrix();
-    	//this.scene.translate(0,0,2);
-    	this.scene.translate(this.x,this.y,this.z);
+    	this.scene.translate(0,0,2);
+    	//this.scene.translate(-this.x,this.y,-this.z);
     	this.scene.scale(0.2,0.2,0.2);
 		this.rearBumper.display();
     this.scene.popMatrix();
 
     //barbatana vertical de tras
    	this.scene.pushMatrix();
-		//this.scene.translate(0,0,2);
-		this.scene.translate(this.x,this.y,this.z+2);
+		this.scene.translate(0,0,2);
+		//this.scene.translate(-this.x,this.y,-this.z+2);
 		this.scene.scale(0.5,0.35,0.3);
 		//this.scene.rotate(this.barbAngle*degToRad,0,1,0);
 		this.barb.display();
@@ -67,13 +72,15 @@ MyTorpedo.prototype.display = function () {
 
 	//barbatana horizontal de tras
     this.scene.pushMatrix();
-    	//this.scene.translate(0,0,2);
-    	this.scene.translate(this.x,this.y,this.z+2);
+    	this.scene.translate(0,0,2);
+    	//this.scene.translate(-this.x,this.y,-this.z+2);
     	this.scene.scale(0.35,0.5,0.3);
     	this.scene.rotate(90*degToRad,0,0,1);
     	//this.scene.rotate(this.vertBarbAngle*degToRad,0,1,0);
 		this.barb.display();
     this.scene.popMatrix();
+
+this.scene.popMatrix();
 }
 
 MyTorpedo.prototype.bezier = function(time) {

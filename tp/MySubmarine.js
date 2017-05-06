@@ -223,5 +223,14 @@ MySubmarine.prototype.update = function(currTime) {
 	}
     for(var i = 0; i < this.torpedo.length; i++){
     	this.torpedo[i].update();
+    	if(this.torpedo[i].x <= 0.5+this.scene.targets[this.targetIndice].x &&
+    	   this.torpedo[i].x >= -0.5+this.scene.targets[this.targetIndice].x &&
+    	   this.torpedo[i].y <= 0.5+this.scene.targets[this.targetIndice].y &&
+    	   this.torpedo[i].y >= -0.5+this.scene.targets[this.targetIndice].y &&
+    	   this.torpedo[i].z <= 0.5+this.scene.targets[this.targetIndice].z &&
+    	   this.torpedo[i].z <= 0.5+this.scene.targets[this.targetIndice].z){
+    	   this.torpedo.splice(0,1);
+    	   this.scene.targets[this.targetIndice].explode();
+    	}
     }
 }

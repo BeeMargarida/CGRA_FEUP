@@ -32,15 +32,19 @@ MyTarget.prototype.display = function () {
         if(this.explosion !== 0 && this.explosion <= 2){
         	this.exp.apply();
         	this.scene.scale(this.explosion,this.explosion,this.explosion);
-        	this.explosion += 1;
+        	this.explosion += 0.005;
         }
         else
         	this.app.apply();
+        if(this.explosion >= 2){
+        	this.scene.targets.splice(this.scene.submarine.targetIndice,1);
+        	this.explosion = 0;
+        }
         this.cube.display();
     this.scene.popMatrix();
 }
 
 MyTarget.prototype.explode = function () {
-	this.cube = new MyLamp(this.scene,8,1);
+	this.cube = new MyLamp(this.scene,8,7);
 	this.explosion = 1;
 }

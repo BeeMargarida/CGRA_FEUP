@@ -47,7 +47,6 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.leftProp = new MyUnitCubeQuad(this.scene);
 	this.middleProp = new MyLamp(this.scene,8,7);
 
-	//this.torpedo = new MyTorpedo(this.scene,this.x,this.y,this.z,0);
 	this.torpedo = [];
 	//textures
 	this.submarineAppearances = [];
@@ -172,10 +171,8 @@ MySubmarine.prototype.display = function () {
 	
 	for(var i = 0; i < this.torpedo.length; i++){
 		this.scene.pushMatrix();
-			//this.scene.translate(this.torpedo[i].x, this.torpedo[i].y, this.torpedo[i].z);
+			this.aluminium.apply();
 			this.torpedo[i].display();
-			/*console.log("z");
-			console.log(this.torpedo[0].z);*/
 		this.scene.popMatrix();
 	}
 };
@@ -215,7 +212,6 @@ MySubmarine.prototype.update = function(currTime) {
 	
 	if(this.createTorpedo === true){
 		this.temp = new MyTorpedo(this.scene,this.x,this.y,this.z,this.angle,this.vertAngle);
-	   	//this.temp.target = this.scene.targets[0];
 	   	this.temp.target = this.scene.targets[this.targetIndice];
 	   	this.temp.updatePoints();
 	   	this.torpedo.push(this.temp);

@@ -50,12 +50,6 @@ MyInterface.prototype.init = function(application) {
 	group.add(this.scene, 'pause');
 
 	//Targets
-/*	var group = this.gui.addFolder('Targets');
-	group.open();
-	group.add(this.scene, 'target1');
-	group.add(this.scene, 'target2');*/
-	
-	//Lista de targets
 	this.gui.add(this.scene, 'target', this.scene.targetList);
 	
 
@@ -67,7 +61,7 @@ MyInterface.prototype.init = function(application) {
 	// this.speed=3;
 	// min and max values can be specified as parameters
 	
-	this.gui.add(this.scene, 'speed', 0, 1);
+	this.gui.add(this.scene, 'speed', 0, 2);
 
 	return true;
 };

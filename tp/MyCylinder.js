@@ -14,7 +14,6 @@ MyCylinder.prototype.initBuffers = function() {
  	var angle = (2*Math.PI)/this.slices;
  	var last = 0;
 
-
     this.vertices = [];
  	this.indices = [];
  	this.normals = [];

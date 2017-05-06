@@ -72,16 +72,16 @@
  	for(s = 0; s <= this.stacks; s++)
 	{
 		this.vertices.push(Math.cos(last)*Math.cos(last2), Math.sin(last)*Math.cos(last2), Math.sin(last2));
-		this.normals.push(Math.cos(last)*Math.cos(last2), /*Math.sin(last)**/Math.cos(last2), Math.sin(last2));
-		this.texCoords.push(0, s / this.stacks);
+		this.normals.push(Math.cos(last)*Math.cos(last2), Math.sin(last)*Math.cos(last2), Math.sin(last2));
+		this.texCoords.push(Math.asin(Math.cos(last2))/Math.PI+0.5, 0.5);
 		indice += 1;
 
 		for(i = 1; i <= this.slices; i++)
 		{
 			last += angle;
 			this.vertices.push(Math.cos(last)*Math.cos(last2), Math.sin(last)*Math.cos(last2), Math.sin(last2));
-			this.normals.push(Math.cos(last)*Math.cos(last2), /*Math.sin(last)**/Math.cos(last2), Math.sin(last2));
-			this.texCoords.push(i / this.slices, s / this.stacks);
+			this.normals.push(Math.cos(last)*Math.cos(last2), Math.sin(last)*Math.cos(last2), Math.sin(last2));
+			this.texCoords.push(Math.asin(Math.cos(last2))/Math.PI+0.5, Math.asin(Math.sin(last) * (Math.cos(last2)))/Math.PI +0.5);
 			indice++;
 
 			if(s > 0 && i > 0)

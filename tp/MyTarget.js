@@ -29,6 +29,7 @@ MyTarget.prototype.display = function () {
 
     this.scene.pushMatrix();
         this.scene.translate(this.x, this.y, this.z);
+        this.scene.rotate(-90*degToRad,1,0,0);
         if(this.explosion !== 0 && this.explosion <= 2){
         	this.exp.apply();
         	this.scene.scale(this.explosion,this.explosion,this.explosion);

@@ -15,7 +15,7 @@
  MyLamp.prototype.constructor = MyLamp;
  
  MyLamp.prototype.initBuffers = function() {
-   
+   /*
     this.vertices = [];
     this.indices = [];
     this.normals = [];
@@ -56,5 +56,44 @@
     }
 
     this.primitiveType = this.scene.gl.TRIANGLES;
-    this.initGLBuffers();
+    this.initGLBuffers();*/
+
+    var angle = (2*Math.PI)/this.slices;
+ 	var last = 0;
+    var angle2 = (Math.PI/2)/this.stacks;
+    var last2 = 0;
+
+    this.vertices = [];
+ 	this.indices = [];
+ 	this.normals = [];
+	this.texCoords = [];
+ 	indice = 0;
+
+ 	for(s = 0; s <= this.stacks; s++)
+	{
+		this.vertices.push(Math.cos(last)*Math.cos(last2), Math.sin(last)*Math.cos(last2), Math.sin(last2));
+		this.normals.push(Math.cos(last)*Math.cos(last2), /*Math.sin(last)**/Math.cos(last2), Math.sin(last2));
+		this.texCoords.push(0, s / this.stacks);
+		indice += 1;
+
+		for(i = 1; i <= this.slices; i++)
+		{
+			last += angle;
+			this.vertices.push(Math.cos(last)*Math.cos(last2), Math.sin(last)*Math.cos(last2), Math.sin(last2));
+			this.normals.push(Math.cos(last)*Math.cos(last2), /*Math.sin(last)**/Math.cos(last2), Math.sin(last2));
+			this.texCoords.push(i / this.slices, s / this.stacks);
+			indice++;
+
+			if(s > 0 && i > 0)
+			{
+				this.indices.push(indice-1, indice-2, indice-this.slices-2);
+				this.indices.push(indice-this.slices-3, indice-this.slices-2, indice-2);
+			}
+		}
+		last = 0;
+		last2 += angle2;
+	}
+	
+	this.primitiveType = this.scene.gl.TRIANGLES;
+	this.initGLBuffers();
  };

@@ -171,7 +171,7 @@ MySubmarine.prototype.display = function () {
 	
 	for(var i = 0; i < this.torpedo.length; i++){
 		this.scene.pushMatrix();
-			this.aluminium.apply();
+			this.submarineAppearances[this.textIndex].apply();
 			this.torpedo[i].display();
 		this.scene.popMatrix();
 	}

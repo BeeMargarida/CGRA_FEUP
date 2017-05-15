@@ -29,8 +29,9 @@ MyTorpedo.prototype.display = function () {
 
 this.scene.pushMatrix();
 	this.scene.translate(this.x,this.y,this.z);
-	this.scene.rotate(this.angle,0,1,0);
-	this.scene.rotate(this.vertAngle,1,0,0);
+	this.scene.rotate(2*Math.PI - Math.atan(this.x/this.z),0,1,0);
+	//this.scene.rotate(Math.PI, 1, 0, 0);
+	this.scene.rotate(3*Math.PI + Math.atan(this.y/this.z),1,0,0);
     
     this.scene.pushMatrix();
 		this.scene.scale(0.2,0.2,2);
@@ -90,5 +91,7 @@ MyTorpedo.prototype.update = function () {
 		this.x = this.qb[0];
 		this.y = this.qb[1];
 		this.z = this.qb[2];
+		/*this.angle = -Math.atan(this.x/this.z);
+		this.vertAngle = -Math.atan(this.y/this.z);*/
 	}
 }

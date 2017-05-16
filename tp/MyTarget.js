@@ -35,12 +35,12 @@ MyTarget.prototype.display = function () {
         	this.scene.scale(this.explosion,this.explosion,this.explosion);
         	this.explosion += 0.005;
         }
-        else
-        	this.app.apply();
-        if(this.explosion >= 2){
+        else if(this.explosion >= 2){
         	this.scene.targets.splice(this.scene.submarine.targetIndice,1);
         	this.explosion = 0;
         }
+        else
+        	this.app.apply();
         this.cube.display();
     this.scene.popMatrix();
 }

@@ -5,11 +5,18 @@ function MyTorpedo(scene,x,y,z,angle,vertAngle) {
     this.x = x;
     this.y = y;
     this.z = z;
+    this.lastX = x;
+    this.lastY = y;
+    this.lastZ = z;
+    this.diffX = this.x-this.lastX;
+    this.diffY = this.y-this.lastY;
+    this.diffZ = this.x-this.lastZ;
     this.angle = angle;
     this.vertAngle = vertAngle;
 
     this.target = null;
     this.time = 0;
+    this.torpTargInd = 0;
 
     this.cylinderBody = new MyCylinder(this.scene,8,7);
 	this.frontBumper = new MyLamp(this.scene, 8,7);
@@ -29,10 +36,16 @@ MyTorpedo.prototype.display = function () {
 
 this.scene.pushMatrix();
 	this.scene.translate(this.x,this.y,this.z);
-	this.scene.rotate(2*Math.PI - Math.atan(this.x/this.z),0,1,0);
-	//this.scene.rotate(Math.PI, 1, 0, 0);
-	this.scene.rotate(3*Math.PI + Math.atan(this.y/this.z),1,0,0);
-    
+	
+	if(this.first === 0){
+		this.scene.rotate(-Math.PI,1,0,0);
+		this.first = 1;
+	}
+	else{
+		this.scene.rotate(-Math.atan(this.diffX/this.diffZ),0,1,0);
+		this.scene.rotate(Math.PI + Math.atan(this.diffY / this.diffZ),1,0,0);
+	}
+
     this.scene.pushMatrix();
 		this.scene.scale(0.2,0.2,2);
 		this.cylinderBody.display();
@@ -85,12 +98,18 @@ MyTorpedo.prototype.updatePoints = function() {
 }
 
 MyTorpedo.prototype.update = function () {
-	if(this.time !== 1){
+	this.lastX = this.x;
+	this.lastY = this.y;
+	this.lastZ = this.z;
+	if(this.time != 1){
 		this.qb = this.bezier(this.time);
 		this.time += 0.01;
 		this.x = this.qb[0];
 		this.y = this.qb[1];
 		this.z = this.qb[2];
+		this.diffX = this.x + this.lastX;
+		this.diffY = this.y + this.lastY;
+		this.diffZ = this.z + this.lastZ;
 		/*this.angle = -Math.atan(this.x/this.z);
 		this.vertAngle = -Math.atan(this.y/this.z);*/
 	}

@@ -52,9 +52,6 @@ LightingScene.prototype.init = function(application) {
 	this.targets = [];
 	this.targets.push(new MyTarget(this, 5,0.5,15));
 	this.targets.push(new MyTarget(this, 0.5,0.5,0.5));
-	this.target = 0;
-	this.targetIndice = 0;
-	this.targetList = ['target1','target2'];
 
 	this.enableTextures(true);
 	this.setUpdatePeriod(100);
@@ -176,6 +173,14 @@ LightingScene.prototype.display = function() {
 LightingScene.prototype.doSomething = function ()
 { console.log("Doing something..."); };
 
+LightingScene.prototype.generateTargets = function() {
+	var x = Math.floor(Math.random()*20);
+	var y = Math.floor(Math.random()*20);
+	var z = Math.floor(Math.random()*20);
+	var targettmp = new MyTarget(this,x,y,z);
+	this.targets.push(targettmp);
+	console.log("CREATED");
+}
 
 LightingScene.prototype.update = function(currTime){
 	if(this.currSubmarineAppearance == 'metal'){
@@ -193,11 +198,6 @@ LightingScene.prototype.update = function(currTime){
 	else if(this.currSubmarineAppearance == 'metallica'){
 		this.submarine.textIndex = 4;
 	}	
-
-	if(this.target === 'target1')
-		this.submarine.targetIndice = 0;
-	else if(this.target === 'target2')
-		this.submarine.targetIndice = 1;
 		
 	this.clock.update(currTime);
 	this.submarine.update(currTime);	

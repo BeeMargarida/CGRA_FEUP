@@ -49,10 +49,6 @@ MyInterface.prototype.init = function(application) {
 	group.open();
 	group.add(this.scene, 'pause');
 
-	//Targets
-	this.gui.add(this.scene, 'target', this.scene.targetList);
-	
-
 	//Textures
 	this.gui.add(this.scene, 'currSubmarineAppearance', this.scene.submarineAppearanceList);
 	
@@ -94,7 +90,9 @@ MyInterface.prototype.processKeyboard = function(event) {
 			break;
 		case(70)://f
 		case(102):
-			this.scene.submarine.createTorpedo = true;
+			if(this.scene.targets.length != this.scene.submarine.torpedo.length){
+				this.scene.submarine.createTorpedo = true;
+			}
 			break;
 	};
 };
@@ -140,6 +138,9 @@ MyInterface.prototype.processKeyDown = function(event) {
 		case(108):
 			this.scene.submarine.l = true;
 			break;
+		case(84):
+		case(116):
+			this.scene.generateTargets();
 	};
 };
 

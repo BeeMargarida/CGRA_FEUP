@@ -21,6 +21,7 @@ function MySubmarine(scene,x,y,z,angle) {
 
 
 	this.targetIndice = 0;
+	this.tempTargetIndice = 0;
 
 	
 	var d = new Date();
@@ -216,17 +217,19 @@ MySubmarine.prototype.update = function(currTime) {
 	   	this.temp.updatePoints();
 	   	this.torpedo.push(this.temp);
 	   	this.createTorpedo = false;
+	   	this.temp.torpTargInd = this.targetIndice;
+	   	this.targetIndice += 1;
 	}
     for(var i = 0; i < this.torpedo.length; i++){
     	this.torpedo[i].update();
-    	if(this.torpedo[i].x <= 0.5+this.scene.targets[this.targetIndice].x &&
-    	   this.torpedo[i].x >= -0.5+this.scene.targets[this.targetIndice].x &&
-    	   this.torpedo[i].y <= 0.5+this.scene.targets[this.targetIndice].y &&
-    	   this.torpedo[i].y >= -0.5+this.scene.targets[this.targetIndice].y &&
-    	   this.torpedo[i].z <= 0.5+this.scene.targets[this.targetIndice].z &&
-    	   this.torpedo[i].z <= 0.5+this.scene.targets[this.targetIndice].z){
-    	   this.torpedo.splice(0,1);
-    	   this.scene.targets[this.targetIndice].explode();
+    	if(this.torpedo[i].x <= 0.5+this.torpedo[i].target.x &&
+    	   this.torpedo[i].x >= -0.5+this.torpedo[i].target.x &&
+    	   this.torpedo[i].y <= 0.5+this.torpedo[i].target.y &&
+    	   this.torpedo[i].y >= -0.5+this.torpedo[i].target.y &&
+    	   this.torpedo[i].z <= 0.5+this.torpedo[i].target.z &&
+    	   this.torpedo[i].z <= 0.5+this.torpedo[i].target.z){
+    	   this.scene.targets[this.torpedo[i].torpTargInd].explode();
+    	   this.torpedo.splice(0,1);  
     	}
     }
 }

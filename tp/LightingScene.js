@@ -37,6 +37,7 @@ LightingScene.prototype.init = function(application) {
 	this.plane = new Plane(this);
 	this.pole = new MyCylinder(this,8,7);
 	this.clock = new MyClock(this,12,1);
+	this.fish = new MyFish(this);
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);
@@ -136,6 +137,10 @@ LightingScene.prototype.display = function() {
 
 	this.pushMatrix();
 		this.submarine.display();
+	this.popMatrix();
+
+	this.pushMatrix();
+		this.fish.display();
 	this.popMatrix();
 
 	this.pushMatrix();

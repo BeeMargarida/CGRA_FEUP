@@ -190,10 +190,10 @@ MySubmarine.prototype.update = function(currTime) {
         this.angle -= 5*Math.PI/180;
     }
     if(this.w === true){
-    	this.speed += 0.05*this.scene.speed;    
+    	this.speed += 0.05*this.scene.speed*deltaTime/100;    
     }
     if(this.s === true){
-        this.speed -= 0.05*this.scene.speed;
+        this.speed -= 0.05*this.scene.speed*deltaTime/100;
     }
     if(this.p === true){
     	this.peri.elevatePeriscope();
@@ -201,10 +201,10 @@ MySubmarine.prototype.update = function(currTime) {
     if(this.l === true){
     	 this.peri.lowerPeriscope();
     }
-    if(this.q === true){
+    if(this.q === true && this.vertAngle < 80*degToRad){
     	this.vertAngle += 5*Math.PI/180;
     }
-    if(this.e === true){
+    if(this.e === true && this.vertAngle > -80*degToRad){
     	this.vertAngle -= 5*Math.PI/180;
     }
     this.x -= this.speed*Math.sin(this.angle);
@@ -214,22 +214,26 @@ MySubmarine.prototype.update = function(currTime) {
 	if(this.createTorpedo === true){
 		this.temp = new MyTorpedo(this.scene,this.x,this.y,this.z,this.angle,this.vertAngle);
 	   	this.temp.target = this.scene.targets[this.targetIndice];
+	   	this.temp.targetInd = this.targetIndice;
 	   	this.temp.updatePoints();
 	   	this.torpedo.push(this.temp);
 	   	this.createTorpedo = false;
-	   	this.temp.torpTargInd = this.targetIndice;
+	   	//this.scene.targets[this.targetIndice].hit = false;
+	   	//this.scene.targets[this.targetIndice].indice = this.targetIndice;
+	   	//console.log(this.targetIndice);
 	   	this.targetIndice += 1;
+	   	this.scene.targtorpRatio -= 1;
 	}
     for(var i = 0; i < this.torpedo.length; i++){
     	this.torpedo[i].update();
-    	if(this.torpedo[i].x <= 0.5+this.torpedo[i].target.x &&
-    	   this.torpedo[i].x >= -0.5+this.torpedo[i].target.x &&
-    	   this.torpedo[i].y <= 0.5+this.torpedo[i].target.y &&
-    	   this.torpedo[i].y >= -0.5+this.torpedo[i].target.y &&
-    	   this.torpedo[i].z <= 0.5+this.torpedo[i].target.z &&
-    	   this.torpedo[i].z <= 0.5+this.torpedo[i].target.z){
-    	   this.scene.targets[this.torpedo[i].torpTargInd].explode();
-    	   this.torpedo.splice(0,1);  
+    	if(this.torpedo[i].x <= 0.5+this.scene.targets[this.torpedo[i].targetInd].x &&
+    	   this.torpedo[i].x >= -0.5+this.scene.targets[this.torpedo[i].targetInd].x &&
+    	   this.torpedo[i].y <= 0.5+this.scene.targets[this.torpedo[i].targetInd].y &&
+    	   this.torpedo[i].y >= -0.5+this.scene.targets[this.torpedo[i].targetInd].y &&
+    	   this.torpedo[i].z <= 0.5+this.scene.targets[this.torpedo[i].targetInd].z &&
+    	   this.torpedo[i].z <= 0.5+this.scene.targets[this.torpedo[i].targetInd].z){
+    	   this.scene.targets[this.torpedo[i].targetInd].explode();
+    	   this.torpedo.splice(0,1);
     	}
     }
 }

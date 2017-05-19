@@ -8,13 +8,14 @@ function MyTorpedo(scene,x,y,z,angle,vertAngle) {
     this.lastX = x;
     this.lastY = y;
     this.lastZ = z;
-    this.diffX = this.x-this.lastX;
-    this.diffY = this.y-this.lastY;
-    this.diffZ = this.x-this.lastZ;
+    this.diffX = this.x+this.lastX;
+    this.diffY = this.y+this.lastY;
+    this.diffZ = this.x+this.lastZ;
     this.angle = angle;
     this.vertAngle = vertAngle;
 
     this.target = null;
+    this.targetInd = null;
     this.time = 0;
     this.torpTargInd = 0;
 
@@ -37,14 +38,8 @@ MyTorpedo.prototype.display = function () {
 this.scene.pushMatrix();
 	this.scene.translate(this.x,this.y,this.z);
 	
-	if(this.first === 0){
-		this.scene.rotate(-Math.PI,1,0,0);
-		this.first = 1;
-	}
-	else{
-		this.scene.rotate(-Math.atan(this.diffX/this.diffZ),0,1,0);
-		this.scene.rotate(Math.PI + Math.atan(this.diffY / this.diffZ),1,0,0);
-	}
+	this.scene.rotate(-Math.atan(this.diffZ/this.diffX),0,1,0);
+	this.scene.rotate(Math.PI + Math.atan(this.diffY / this.diffZ),1,0,0);
 
     this.scene.pushMatrix();
 		this.scene.scale(0.2,0.2,2);

@@ -51,8 +51,14 @@ LightingScene.prototype.init = function(application) {
 	
 	//Targets
 	this.targets = [];
+	this.targIndice = 0;
 	this.targets.push(new MyTarget(this, 5,0.5,15));
+	this.targets[0].indice = this.targIndice;
+	this.targIndice += 1;
 	this.targets.push(new MyTarget(this, 0.5,0.5,0.5));
+	this.targets[1].indice = this.targIndice;
+	this.targIndice += 1;
+	this.targtorpRatio = 2;
 
 	this.enableTextures(true);
 	this.setUpdatePeriod(100);
@@ -167,9 +173,12 @@ LightingScene.prototype.display = function() {
 	this.popMatrix();
 
 	for(var i = 0; i < this.targets.length; i++){
-		this.pushMatrix();
+		if(this.targets[i].show === true)
 			this.targets[i].display();
-		this.popMatrix();
+	}
+
+	for(var i = 0; i < this.targets.length; i++){
+		console.log(this.targets[i].indice);
 	}
 
 	// ---- END Primitive drawing section
@@ -180,14 +189,17 @@ LightingScene.prototype.doSomething = function ()
 
 LightingScene.prototype.generateTargets = function() {
 	var x = Math.floor(Math.random()*20);
-	var y = Math.floor(Math.random()*20);
+	var y = Math.floor(Math.random()*20+1);
 	var z = Math.floor(Math.random()*20);
 	var targettmp = new MyTarget(this,x,y,z);
 	this.targets.push(targettmp);
-	console.log("CREATED");
+	this.targets[this.targets.length -1].indice = this.targIndice;
+	this.targtorpRatio += 1;
+	this.targIndice += 1;
 }
 
 LightingScene.prototype.update = function(currTime){
+
 	if(this.currSubmarineAppearance == 'metal'){
 		this.submarine.textIndex = 0;
 	}
@@ -204,6 +216,11 @@ LightingScene.prototype.update = function(currTime){
 		this.submarine.textIndex = 4;
 	}	
 		
+	/*for(var i = 0; i < this.targets.length; i++){
+		if(this.targets[i].show === true)
+		console.log(this.targets[i].indice);
+	}*/
+	
 	this.clock.update(currTime);
 	this.submarine.update(currTime);	
 }

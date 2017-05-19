@@ -90,7 +90,7 @@ MyInterface.prototype.processKeyboard = function(event) {
 			break;
 		case(70)://f
 		case(102):
-			if(this.scene.targets.length != this.scene.submarine.torpedo.length){
+			if(this.scene.targtorpRatio > 0){
 				this.scene.submarine.createTorpedo = true;
 			}
 			break;

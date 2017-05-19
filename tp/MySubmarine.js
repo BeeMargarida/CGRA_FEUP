@@ -72,10 +72,10 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.camo.setTextureWrap('REPEAT','REPEAT');
 	this.submarineAppearances.push(this.camo);
 
-	this.metallica = new CGFappearance(this.scene);
-	this.metallica.loadTexture("../resources/images/metal.jpg");
-	this.metallica.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
-	this.submarineAppearances.push(this.metallica);
+	this.w95 = new CGFappearance(this.scene);
+	this.w95.loadTexture("../resources/images/w95.jpg");
+	this.w95.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
+	this.submarineAppearances.push(this.w95);
 
 	this.textIndex = 0;
 
@@ -218,9 +218,6 @@ MySubmarine.prototype.update = function(currTime) {
 	   	this.temp.updatePoints();
 	   	this.torpedo.push(this.temp);
 	   	this.createTorpedo = false;
-	   	//this.scene.targets[this.targetIndice].hit = false;
-	   	//this.scene.targets[this.targetIndice].indice = this.targetIndice;
-	   	//console.log(this.targetIndice);
 	   	this.targetIndice += 1;
 	   	this.scene.targtorpRatio -= 1;
 	}

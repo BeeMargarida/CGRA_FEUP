@@ -47,7 +47,11 @@ MyInterface.prototype.init = function(application) {
 	//pause controls
 	var group = this.gui.addFolder('Pause Clock');
 	group.open();
-	group.add(this.scene, 'pause');
+	group.add(this.scene, 'clock_pause');
+
+	group = this.gui.addFolder('Pause Sounds');
+	group.open();
+	group.add(this.scene, 'sound_pause');
 
 	//Textures
 	this.gui.add(this.scene, 'currSubmarineAppearance', this.scene.submarineAppearanceList);

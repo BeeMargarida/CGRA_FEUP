@@ -16,6 +16,11 @@ function MyTarget(scene, x, y, z){
     this.cube = new MyUnitCubeQuad(this.scene,0,1,0,1);
     this.cube2 = null;
 
+	this.sound = new Audio();
+	this.sound.src = "../resources/images/explosion.mp3";
+	this.sound.loop = false;
+	
+
     this.app = new CGFappearance(this.scene);
 	this.app.loadTexture("../resources/images/target.png");
 	this.app.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
@@ -57,7 +62,7 @@ MyTarget.prototype.display = function () {
 }
 
 MyTarget.prototype.explode = function () {
-	console.log("explosao"+ this.indice);
+	this.sound.play();
 	this.cube = new MyLamp(this.scene,8,7);
 	this.cube2 = new MyLamp(this.scene,8,7);
 	this.explosion = 1;

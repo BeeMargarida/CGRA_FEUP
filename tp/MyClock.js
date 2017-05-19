@@ -71,7 +71,7 @@ MyClock.prototype.update = function(currTime) {
 
 	if(deltaTime >= 1000){
 		this.startTime = currTime;
-		if(this.scene.pause == false){
+		if(this.scene.clock_pause == false){
 			this.secPointer.setAngle(this.secPointer.angle + secAngle*deltaTime/1000);
 			this.minPointer.setAngle(this.minPointer.angle + minAngle*deltaTime/1000);
 			this.hourPointer.setAngle(this.hourPointer.angle + hourAngle*deltaTime/1000);

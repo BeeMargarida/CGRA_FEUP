@@ -33,10 +33,10 @@
       ];
 
       this.texCoords = [
-		this.minS, this.maxT,
-		this.maxS, this.minT,
-		this.maxS, this.maxT,
-		this.minS, this.minT	
+		0,0,
+		0,1,
+		1,0,
+		1,1
       ];
 
 	this.primitiveType = this.scene.gl.TRIANGLES;

@@ -29,7 +29,8 @@ LightingScene.prototype.init = function(application) {
 	this.axis = new CGFaxis(this);
 
 	this.light1=true; this.light2=true; this.light3=true; this.speed=1;
-	this.pause = false;
+	this.clock_pause = false;
+	this.sound_pause = false;
 	this.currSubmarineAppearance = 0;
 
 	// Scene elements
@@ -37,8 +38,14 @@ LightingScene.prototype.init = function(application) {
 	this.plane = new Plane(this);
 	this.pole = new MyCylinder(this,8,7);
 	this.clock = new MyClock(this,12,1);
-	this.fish = new MyFish(this);
+	this.fishes = [];
+	this.fishes.push(new MyFish(this,-2,3));
+	this.fishes.push(new MyFish(this,-2.5,2));
+	this.fishes.push(new MyFish(this,-1,1));
+	this.fishes.push(new MyFish(this,-1.5,4));
+	this.fishes.push(new MyFish(this,-3,2.5));
 
+	this.torp = new MyTorpedo(this,0,0,0,0,0);
 	// Materials
 	this.materialDefault = new CGFappearance(this);
 
@@ -47,7 +54,7 @@ LightingScene.prototype.init = function(application) {
 	this.oceanAppearance.setTextureWrap('REPEAT','REPEAT');
 
 	//Submarine textures
-	this.submarineAppearanceList = ['metal','wood','wool','camo','metallica'];
+	this.submarineAppearanceList = ['metal','wood','wool','camo','w95'];
 	
 	//Targets
 	this.targets = [];
@@ -59,6 +66,12 @@ LightingScene.prototype.init = function(application) {
 	this.targets[1].indice = this.targIndice;
 	this.targIndice += 1;
 	this.targtorpRatio = 2;
+
+	this.audio = new Audio();
+	this.audio.src = "../resources/images/music.mp3";
+	this.audio.loop = true;
+	this.audio.volume = 0.05;
+	
 
 	this.enableTextures(true);
 	this.setUpdatePeriod(100);
@@ -140,13 +153,10 @@ LightingScene.prototype.display = function() {
 	// ---- END Background, camera and axis setup
 
 	// ---- BEGIN Primitive drawing section
+	this.torp.display();
 
 	this.pushMatrix();
 		this.submarine.display();
-	this.popMatrix();
-
-	this.pushMatrix();
-		this.fish.display();
 	this.popMatrix();
 
 	this.pushMatrix();
@@ -176,7 +186,17 @@ LightingScene.prototype.display = function() {
 		if(this.targets[i].show === true)
 			this.targets[i].display();
 	}
-	// ---- END Primitive drawing section
+
+	for(var i = 0; i < this.fishes.length; i++){
+		this.fishes[i].display();
+	}
+
+	if(this.sound_pause === false){
+		this.audio.play();
+	}
+	else{
+		this.audio.pause();
+	}
 };
 
 LightingScene.prototype.doSomething = function ()
@@ -207,15 +227,16 @@ LightingScene.prototype.update = function(currTime){
 	else if(this.currSubmarineAppearance == 'camo'){
 		this.submarine.textIndex = 3;
 	}
-	else if(this.currSubmarineAppearance == 'metallica'){
+	else if(this.currSubmarineAppearance == 'w95'){
 		this.submarine.textIndex = 4;
 	}	
 		
-	/*for(var i = 0; i < this.targets.length; i++){
-		if(this.targets[i].show === true)
-		console.log(this.targets[i].indice);
-	}*/
-	
 	this.clock.update(currTime);
 	this.submarine.update(currTime);	
+
+
+	for(var i = 0; i < this.fishes.length; i++){
+		this.fishes[i].update(currTime);
+	}
+
 }

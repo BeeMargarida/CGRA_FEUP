@@ -18,7 +18,6 @@ MyTriangle.prototype.initBuffers = function () {
  		-0.5, 0.5, 0,
  	];
 
-
  	this.indices = [
  		0, 1, 2,
  	];

@@ -38,8 +38,20 @@ MyTorpedo.prototype.display = function () {
 this.scene.pushMatrix();
 	this.scene.translate(this.x,this.y,this.z);
 	
-	this.scene.rotate(-Math.atan(this.diffZ/this.diffX),0,1,0);
-	this.scene.rotate(Math.PI + Math.atan(this.diffY / this.diffZ),1,0,0);
+	if(Math.abs(this.angle) > Math.PI){
+		this.scene.rotate(Math.PI + Math.atan(this.angle),0,1,0);
+	}
+	else {
+		this.scene.rotate(Math.PI/2 - Math.atan(this.angle),0,1,0);
+	}
+	console.log(this.angle/degToRad);
+	/*if(Math.abs(this.vertAngle) < 0){
+		this.scene.rotate(-Math.atan(this.vertAngle),1,0,0);
+	}
+	else {*/
+		this.scene.rotate(-Math.atan(this.vertAngle),1,0,0);
+	//}
+	console.log(this.vertAngle/degToRad);
 
     this.scene.pushMatrix();
 		this.scene.scale(0.2,0.2,2);
@@ -99,13 +111,16 @@ MyTorpedo.prototype.update = function () {
 	if(this.time != 1){
 		this.qb = this.bezier(this.time);
 		this.time += 0.01;
+
 		this.x = this.qb[0];
 		this.y = this.qb[1];
 		this.z = this.qb[2];
-		this.diffX = this.x + this.lastX;
-		this.diffY = this.y + this.lastY;
-		this.diffZ = this.z + this.lastZ;
-		/*this.angle = -Math.atan(this.x/this.z);
-		this.vertAngle = -Math.atan(this.y/this.z);*/
+
+		this.diffX = this.x - this.lastX;
+		this.diffY = this.y - this.lastY;
+		this.diffZ = this.z - this.lastZ;
+		
+		this.angle = Math.atan(this.diffZ/this.diffX);
+		this.vertAngle = Math.atan(this.diffY/this.diffX);
 	}
 }

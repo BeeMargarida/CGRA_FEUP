@@ -176,11 +176,6 @@ LightingScene.prototype.display = function() {
 		if(this.targets[i].show === true)
 			this.targets[i].display();
 	}
-
-	for(var i = 0; i < this.targets.length; i++){
-		console.log(this.targets[i].indice);
-	}
-
 	// ---- END Primitive drawing section
 };
 

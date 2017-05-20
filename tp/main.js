@@ -28,6 +28,7 @@ serialInclude([
 	'MyTorpedo.js',
 	'MyEqualSidedTriangle.js',
 	'MyFish.js',
+	'MyBubble.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

@@ -41,7 +41,6 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.barbAngle = 0;
 	this.vertBarbAngle = 0;
 
-
 	this.propeller = new MyCylinder(this.scene,8,7);
 	this.insideProp = new MyCylinderInside(this.scene,8,7);
 	this.rightProp = new MyUnitCubeQuad(this.scene);
@@ -49,17 +48,25 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.middleProp = new MyLamp(this.scene,8,7);
 
 	this.torpedo = [];
+	this.bubbles = [];
 	//textures
 	this.submarineAppearances = [];
 
 	this.aluminium = new CGFappearance(this.scene);
 	this.aluminium.loadTexture("../resources/images/metal.png");
-	//this.aluminium.setTextureWrap('REPEAT','REPEAT');
+	this.aluminium.setAmbient(0.8, 0.8, 0.8, 1);
+	this.aluminium.setDiffuse(0.8, 0.8, 0.8, 0.3);
+	this.aluminium.setSpecular(0.8, 0.8, 0.8, 1);
+	this.aluminium.setEmission(0.2,0.2,0.2,1);
+	this.aluminium.setShininess(300);
 	this.submarineAppearances.push(this.aluminium);
 
 	this.wood = new CGFappearance(this.scene);
 	this.wood.loadTexture("../resources/images/table.png");
 	this.wood.setTextureWrap('REPEAT','REPEAT');
+	this.wood.setAmbient(0.8,0.8,0.8,1);
+	this.wood.setDiffuse(0.8, 0.8, 0.8, 0.3);
+	this.wood.setSpecular(0.1,0.1,0.1,0.8);
 	this.submarineAppearances.push(this.wood);
 
 	this.wool = new CGFappearance(this.scene);
@@ -176,6 +183,10 @@ MySubmarine.prototype.display = function () {
 			this.torpedo[i].display();
 		this.scene.popMatrix();
 	}
+
+	for(var i = 0; i < this.bubbles.length; i++){
+		this.bubbles[i].display();
+	}
 };
 
 MySubmarine.prototype.update = function(currTime) {
@@ -190,7 +201,9 @@ MySubmarine.prototype.update = function(currTime) {
         this.angle -= 5*Math.PI/180;
     }
     if(this.w === true){
-    	this.speed += 0.05*this.scene.speed*deltaTime/100;    
+    	this.speed += 0.05*this.scene.speed*deltaTime/100;
+    	this.bubbles1 = new MyBubble(this.scene,this.x + 1, this.y + 1.4, this.z - 1.9, this.angle, this.vertAngle);
+   		this.bubbles.push(this.bubbles1);
     }
     if(this.s === true){
         this.speed -= 0.05*this.scene.speed*deltaTime/100;
@@ -233,4 +246,10 @@ MySubmarine.prototype.update = function(currTime) {
     	   this.torpedo.splice(0,1);
     	}
     }
-}
+    for(var i = 0; i < this.bubbles.length; i++){
+    	this.bubbles[i].update();
+    	if(this.bubbles[i].updateTime <= 0){
+    		this.bubbles.splice(i, 1);
+    	}
+    }
+};

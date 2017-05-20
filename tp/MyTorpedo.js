@@ -108,12 +108,8 @@ MyTorpedo.prototype.update = function() {
         this.diffY = this.y - this.lastY;
         this.diffZ = this.z - this.lastZ;
 
-        //console.log("Before" + this.angle);
-        console.log("X"+this.diffX);console.log("Z"+this.diffZ);
         
-        this.angle = Math.atan(this.diffX / this.diffZ + (this.diffZ<0 ? Math.PI : 0));
-        // + (this.diffZ<0 ? Math.PI : 0));
-        //console.log("After" + this.angle);
+        this.angle = Math.atan(this.diffX / this.diffZ) + (this.diffZ<0 ? Math.PI : 0);
         this.vertAngle = Math.atan(this.diffY / (Math.sqrt(this.diffX * this.diffX + this.diffY * this.diffY + this.diffZ * this.diffZ)));
     }
 }

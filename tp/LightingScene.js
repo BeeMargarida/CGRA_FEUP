@@ -45,7 +45,6 @@ LightingScene.prototype.init = function(application) {
 	this.fishes.push(new MyFish(this,-1.5,4));
 	this.fishes.push(new MyFish(this,-3,2.5));
 
-	this.torp = new MyTorpedo(this,0,0,0,0,0);
 	// Materials
 	this.materialDefault = new CGFappearance(this);
 
@@ -153,7 +152,6 @@ LightingScene.prototype.display = function() {
 	// ---- END Background, camera and axis setup
 
 	// ---- BEGIN Primitive drawing section
-	this.torp.display();
 
 	this.pushMatrix();
 		this.submarine.display();

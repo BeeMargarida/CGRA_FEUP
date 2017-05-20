@@ -54,11 +54,11 @@ LightingScene.prototype.init = function(application) {
 	this.oceanAppearance.loadTexture("../resources/images/ocean.jpg");
 	this.oceanAppearance.setTextureWrap('REPEAT','REPEAT');
 
-	this.shark = new MyQuad(this,0,1,0,1);
-	this.sharkAppearance = new CGFappearance(this);
-	this.sharkAppearance.loadTexture("../resources/images/shark.png");
-	this.sharkAppearance.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
-	this.sharkAppearance.setShininess(100);
+	//Sharks
+	this.sharks = [];
+	this.sharks.push(new MyShark(this, -10,10,-20,1));
+	this.sharks.push(new MyShark(this, 5,2,-30,2));
+	this.sharks.push(new MyShark(this, 15,6,-40,3));
 	//Submarine textures
 	this.submarineAppearanceList = ['metal','wood','wool','camo','w95'];
 	
@@ -164,13 +164,6 @@ LightingScene.prototype.display = function() {
 		this.submarine.display();
 	this.popMatrix();
 
-	this.pushMatrix();
-		this.sharkAppearance.apply();
-		this.translate(5,5,-10);
-		this.scale(10,7,1);
-		this.shark.display();
-		this.materialDefault.apply();
-	this.popMatrix();
 
 	this.pushMatrix();
 		this.translate(7.5, 0, 7.5);
@@ -202,6 +195,10 @@ LightingScene.prototype.display = function() {
 
 	for(var i = 0; i < this.fishes.length; i++){
 		this.fishes[i].display();
+	}
+
+	for(var i = 0; i < this.sharks.length; i++){
+		this.sharks[i].display();
 	}
 
 	if(this.sound_pause === false){
@@ -251,5 +248,9 @@ LightingScene.prototype.update = function(currTime){
 	for(var i = 0; i < this.fishes.length; i++){
 		this.fishes[i].update(currTime);
 	}
+	
 
+	for(var i = 0; i < this.sharks.length; i++){
+		this.sharks[i].update(currTime);
+	}
 }

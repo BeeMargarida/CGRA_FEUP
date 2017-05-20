@@ -29,6 +29,7 @@ serialInclude([
 	'MyEqualSidedTriangle.js',
 	'MyFish.js',
 	'MyBubble.js',
+	'MyShark.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

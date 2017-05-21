@@ -28,30 +28,29 @@ function MyBubble(scene, x,y,z, angle, vertAngle) {
  MyBubble.prototype.display = function() {
  	this.bubbleTexture.apply();
  this.scene.pushMatrix();
- this.scene.translate(this.x, this.y, this.z);
+ this.scene.translate(this.x, this.y + 1.6, this.z);
  this.scene.rotate(this.angle, 0,1,0);
  this.scene.rotate(this.vertAngle,1,0,0);
- this.scene.scale(0.4,0.4,0.4);
    	
   	this.scene.pushMatrix();
-  		this.scene.scale(this.scale, this.scale, this.scale);
+  		this.scene.scale(0.4+this.scale, 0.4+this.scale, 0.4+this.scale);
 		this.quad.display();
   	this.scene.popMatrix();
   	this.scene.pushMatrix();
   		this.scene.rotate(180*degToRad, 0, 1, 0);
-  		this.scene.scale(this.scale, this.scale, this.scale);
+  		this.scene.scale(0.4+this.scale, 0.4+this.scale, 0.4+this.scale);
   		this.quad.display();
   	this.scene.popMatrix();
 
   	this.scene.pushMatrix();
-  		this.scene.translate(5,0,0);
-  		this.scene.scale(this.scale, this.scale, this.scale);
+  		this.scene.translate(2,0,0);
+  		this.scene.scale(0.4+this.scale, 0.4+this.scale, 0.4+this.scale);
 		this.quad.display();
   	this.scene.popMatrix();
   	this.scene.pushMatrix();
-  		this.scene.translate(5,0,0);
+  		this.scene.translate(2,0,0);
   		this.scene.rotate(180*degToRad, 0, 1, 0);
-  		this.scene.scale(this.scale, this.scale, this.scale);
+  		this.scene.scale(0.4+this.scale, 0.4+this.scale, 0.4+this.scale);
   		this.quad.display();
   this.scene.popMatrix();
   this.scale -= 0.01;

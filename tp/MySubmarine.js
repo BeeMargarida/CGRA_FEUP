@@ -202,7 +202,7 @@ MySubmarine.prototype.update = function(currTime) {
     }
     if(this.w === true){
     	this.speed += 0.05*this.scene.speed*deltaTime/100;
-    	this.bubbles1 = new MyBubble(this.scene,this.x + 1*Math.sin(this.angle), this.y+Math.sin(this.vertAngle), this.z+3*Math.cos(this.angle), this.angle, this.vertAngle);
+    	this.bubbles1 = new MyBubble(this.scene,this.x - 1*Math.sin(this.angle), this.y+Math.sin(this.vertAngle), this.z+3*Math.cos(this.angle), this.angle, this.vertAngle);
    		this.bubbles.push(this.bubbles1);
     }
     if(this.s === true){

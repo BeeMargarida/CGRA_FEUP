@@ -54,6 +54,11 @@ LightingScene.prototype.init = function(application) {
 	this.oceanAppearance.loadTexture("../resources/images/ocean.jpg");
 	this.oceanAppearance.setTextureWrap('REPEAT','REPEAT');
 
+	
+	this.bubbleTexture = new CGFappearance(this);
+	this.bubbleTexture.loadTexture("../resources/images/bubble1.png");
+	this.bubbleTexture.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
+
 	//Sharks
 	this.sharks = [];
 	this.sharks.push(new MyShark(this, -10,10,-20,1));
@@ -160,6 +165,7 @@ LightingScene.prototype.display = function() {
 
 	// ---- BEGIN Primitive drawing section
 
+	//ocean floor
 	this.pushMatrix();
 		this.translate(7.5, 0, 7.5);
 		this.oceanAppearance.apply();
@@ -169,6 +175,7 @@ LightingScene.prototype.display = function() {
 		this.materialDefault.apply();
 	this.popMatrix();
 
+	//clock pole
 	this.pushMatrix();
 		this.translate(8,0,0);
 		this.rotate(-90*degToRad,1,0,0);
@@ -176,6 +183,7 @@ LightingScene.prototype.display = function() {
 		this.pole.display();
 	this.popMatrix();
 
+	//clock
 	this.pushMatrix();
 		this.translate(8,5,0);
 		this.scale(1,1,0.2);
@@ -183,19 +191,23 @@ LightingScene.prototype.display = function() {
 		this.clock.display();
 	this.popMatrix();
 
+	//targets
 	for(var i = 0; i < this.targets.length; i++){
 		if(this.targets[i].show === true)
 			this.targets[i].display();
 	}
-
+	
+	//fishes
 	for(var i = 0; i < this.fishes.length; i++){
 		this.fishes[i].display();
 	}
 
+	//sharks
 	for(var i = 0; i < this.sharks.length; i++){
 		this.sharks[i].display();
 	}
 	
+	//ocean sound 
 	if(this.sound_pause === false){
 		this.audio.play();
 	}
@@ -203,13 +215,11 @@ LightingScene.prototype.display = function() {
 		this.audio.pause();
 	}
 	
+	//submarine
 	this.pushMatrix();
 		this.submarine.display();
 	this.popMatrix();
 };
-
-LightingScene.prototype.doSomething = function ()
-{ console.log("Doing something..."); };
 
 LightingScene.prototype.generateTargets = function() {
 	var x = Math.floor(Math.random()*20);
@@ -243,12 +253,10 @@ LightingScene.prototype.update = function(currTime){
 	this.clock.update(currTime);
 	this.submarine.update(currTime);	
 
-
 	for(var i = 0; i < this.fishes.length; i++){
 		this.fishes[i].update(currTime);
 	}
 	
-
 	for(var i = 0; i < this.sharks.length; i++){
 		this.sharks[i].update(currTime);
 	}

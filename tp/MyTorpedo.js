@@ -98,7 +98,7 @@ MyTorpedo.prototype.updatePoints = function() {
 MyTorpedo.prototype.update = function(currTime) {
     var deltaTime = currTime - this.startTime;
     this.startTime = currTime;
-    console.log(deltaTime);
+    
     this.lastX = this.x;
     this.lastY = this.y;
     this.lastZ = this.z;

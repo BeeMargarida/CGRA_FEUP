@@ -65,9 +65,13 @@ MyPropeller.prototype.updateRight = function (deltaTime, speed) {
 MyPropeller.prototype.update = function (deltaTime, speed){
 	this.scene.submarine.prop1.updateLeft(deltaTime,speed);
 	this.scene.submarine.prop2.updateRight(deltaTime,speed);
+	this.speed = speed;
 
 	if(this.speed > 0 && this.bubbles.length < 5){
-		this.bubbles.push(new MyBubble(this.scene,this.x,this.y,this.z-0.1,0,0));
+		this.bubbles.push(new MyBubble(this.scene,this.x,this.y,this.z+0.2,0,0,1));
+	}
+	if(this.speed < 0 && this.bubbles.length < 5){
+		this.bubbles.push(new MyBubble(this.scene,this.x,this.y,this.z-1.5,0,0,-1));
 	}
 	
 	for(var i = 0; i < this.bubbles.length; i++){

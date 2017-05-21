@@ -35,8 +35,8 @@ function MySubmarine(scene,x,y,z,angle) {
 
 	this.barb = new MyTrap(this.scene);
 	this.peri = new MyPeriscope(this.scene);
-	this.prop1 = new MyPropeller(this.scene);
-	this.prop2 = new MyPropeller(this.scene);
+	this.prop1 = new MyPropeller(this.scene,1,-0.4,1.9);
+	this.prop2 = new MyPropeller(this.scene,-1,-0.4,1.9);
 
 	this.barbAngle = 0;
 	this.vertBarbAngle = 0;
@@ -48,7 +48,7 @@ function MySubmarine(scene,x,y,z,angle) {
 	this.middleProp = new MyLamp(this.scene,8,7);
 
 	this.torpedo = [];
-	this.bubbles = [];
+
 	//textures
 	this.submarineAppearances = [];
 
@@ -166,14 +166,12 @@ MySubmarine.prototype.display = function () {
 	//Propellers
 	//right
 	this.scene.pushMatrix();
-		this.scene.translate(1,-0.4,1.9);
-		this.prop1.display();
+		this.prop2.display();
 	this.scene.popMatrix();
 
 	//left
     this.scene.pushMatrix();
-		this.scene.translate(-1,-0.4,1.9);
-		this.prop2.display();
+		this.prop1.display();
 	this.scene.popMatrix();
 	this.scene.popMatrix();
 	
@@ -183,17 +181,14 @@ MySubmarine.prototype.display = function () {
 			this.torpedo[i].display();
 		this.scene.popMatrix();
 	}
-
-	for(var i = 0; i < this.bubbles.length; i++){
-		this.bubbles[i].display();
-	}
 };
 
 MySubmarine.prototype.update = function(currTime) {
 	var deltaTime = currTime - this.startTime;
 	this.startTime = currTime;
-	this.prop1.updateLeft(deltaTime, this.speed);
-	this.prop2.updateRight(deltaTime, this.speed);
+
+	this.prop1.update(deltaTime,this.speed);
+
     if(this.a === true){
 		this.angle += 5*Math.PI/180*deltaTime/100;
     }
@@ -202,8 +197,6 @@ MySubmarine.prototype.update = function(currTime) {
     }
     if(this.w === true){
     	this.speed += 0.05*this.scene.speed*deltaTime/100;
-    	this.bubbles1 = new MyBubble(this.scene,this.x - 1*Math.sin(this.angle), this.y+Math.sin(this.vertAngle), this.z+3*Math.cos(this.angle), this.angle, this.vertAngle);
-   		this.bubbles.push(this.bubbles1);
     }
     if(this.s === true){
         this.speed -= 0.05*this.scene.speed*deltaTime/100;
@@ -220,6 +213,7 @@ MySubmarine.prototype.update = function(currTime) {
     if(this.e === true && this.vertAngle > -80*degToRad){
     	this.vertAngle -= 5*Math.PI/180*deltaTime/100;
     }
+    
     this.x -= this.speed*Math.sin(this.angle)*deltaTime/100;
     this.y += this.speed*Math.sin(this.vertAngle)*deltaTime/100;
     this.z -= this.speed*Math.cos(this.angle)*deltaTime/100;
@@ -246,10 +240,5 @@ MySubmarine.prototype.update = function(currTime) {
     	   this.torpedo.splice(0,1);
     	}
     }
-    for(var i = 0; i < this.bubbles.length; i++){
-    	this.bubbles[i].update(currTime);
-    	if(this.bubbles[i].updateTime <= 0){
-    		this.bubbles.splice(i, 1);
-    	}
-    }
+
 };

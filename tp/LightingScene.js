@@ -164,7 +164,7 @@ LightingScene.prototype.display = function() {
 		this.translate(7.5, 0, 7.5);
 		this.oceanAppearance.apply();
 		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.scale(30, 30, 0.2);
+		this.scale(50, 50, 0.2);
 		this.plane.display();
 		this.materialDefault.apply();
 	this.popMatrix();

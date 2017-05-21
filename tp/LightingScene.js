@@ -161,11 +161,6 @@ LightingScene.prototype.display = function() {
 	// ---- BEGIN Primitive drawing section
 
 	this.pushMatrix();
-		this.submarine.display();
-	this.popMatrix();
-
-
-	this.pushMatrix();
 		this.translate(7.5, 0, 7.5);
 		this.oceanAppearance.apply();
 		this.rotate(-90 * degToRad, 1, 0, 0);
@@ -200,13 +195,17 @@ LightingScene.prototype.display = function() {
 	for(var i = 0; i < this.sharks.length; i++){
 		this.sharks[i].display();
 	}
-
+	
 	if(this.sound_pause === false){
 		this.audio.play();
 	}
 	else{
 		this.audio.pause();
 	}
+	
+	this.pushMatrix();
+		this.submarine.display();
+	this.popMatrix();
 };
 
 LightingScene.prototype.doSomething = function ()

@@ -247,7 +247,7 @@ MySubmarine.prototype.update = function(currTime) {
     	}
     }
     for(var i = 0; i < this.bubbles.length; i++){
-    	this.bubbles[i].update();
+    	this.bubbles[i].update(currTime);
     	if(this.bubbles[i].updateTime <= 0){
     		this.bubbles.splice(i, 1);
     	}

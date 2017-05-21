@@ -69,8 +69,6 @@
  		this.firstTime = 1;
  	}
  	else{
- 		var deltaTime = currTime - this.lastTime;
- 		this.lastTime = currTime;
 		if(this.x >= 20){
 			this.x = -10;
 		}

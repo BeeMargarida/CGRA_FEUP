@@ -9,6 +9,9 @@ function MyBubble(scene, x,y,z, angle, vertAngle) {
  	this.angle = angle;
  	this.vertAngle = vertAngle;
 
+ 	var d = new Date();
+	this.startTime = d.getTime();
+
  	this.updateTime = 2;
  	this.scale = 1;
 
@@ -57,10 +60,12 @@ function MyBubble(scene, x,y,z, angle, vertAngle) {
  };
 
  MyBubble.prototype.update = function(currTime) {
+	var deltaTime = currTime - this.startTime;
+	this.startTime = currTime;
  	if(this.updateTime > 0){	
-		this.x += 0.1*Math.sin(this.angle);
-		this.y += 0.1*Math.sin(this.vertAngle);
-		this.z += 0.1*Math.cos(this.angle);
+		this.x += 0.1*Math.sin(this.angle)*deltaTime/100;
+		this.y += 0.1*Math.sin(this.vertAngle)*deltaTime/100;
+		this.z += 0.1*Math.cos(this.angle)*deltaTime/100;
 		this.updateTime -= 0.15;
  	}
  }

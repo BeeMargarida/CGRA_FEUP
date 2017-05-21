@@ -14,13 +14,9 @@ function MyBubble(scene, x,y,z, angle, vertAngle) {
 
  	this.quad = new MyQuad(this.scene,0,1,0,1);
  
-	//this.materialDefault = new CGFappearance(this.scene);
     this.bubbleTexture = new CGFappearance(this.scene);
 	this.bubbleTexture.loadTexture("../resources/images/bubble1.png");
 	this.bubbleTexture.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
-	/*this.bubbleTexture.setAmbient(0,0,0,0);
-	this.bubbleTexture.setDiffuse(0, 0, 0, 0);
-	this.bubbleTexture.setSpecular(0,0,0,0);*/
 };
 
  MyBubble.prototype = Object.create(CGFobject.prototype);

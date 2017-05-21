@@ -18,6 +18,9 @@ function MyTorpedo(scene, x, y, z, angle, vertAngle) {
     this.targetInd = null;
     this.time = 0;
     this.torpTargInd = 0;
+    	
+    var d = new Date();
+	this.startTime = d.getTime();
 
     this.cylinderBody = new MyCylinder(this.scene,8,7);
     this.frontBumper = new MyLamp(this.scene,8,7);
@@ -92,13 +95,16 @@ MyTorpedo.prototype.updatePoints = function() {
     this.p4 = [this.target.x, this.target.y, this.target.z];
 }
 
-MyTorpedo.prototype.update = function() {
+MyTorpedo.prototype.update = function(currTime) {
+    var deltaTime = currTime - this.startTime;
+    this.startTime = currTime;
+    console.log(deltaTime);
     this.lastX = this.x;
     this.lastY = this.y;
     this.lastZ = this.z;
     if (this.time != 1) {
         this.qb = this.bezier(this.time);
-        this.time += 0.01;
+        this.time += 0.01*deltaTime/100;
 
         this.x = this.qb[0];
         this.y = this.qb[1];

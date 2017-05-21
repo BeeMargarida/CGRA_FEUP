@@ -8,7 +8,9 @@ function MyShark(scene, x, y, z, tex){
  	this.tex = tex;
 
  	this.shark = new MyQuad(this.scene,0,1,0,1);
-
+	
+	var d = new Date();
+	this.startTime = d.getTime();
 
 	this.sharkAppearance1 = new CGFappearance(this.scene);
 	this.sharkAppearance1.loadTexture("../resources/images/shark1.png");
@@ -44,17 +46,19 @@ MyShark.prototype.display = function() {
 }
 
 MyShark.prototype.update = function(currTime) {
+	var deltaTime = currTime - this.startTime;
+	this.startTime = currTime;
 	if(this.tex === 2){
 		if(this.x >= 50){
 			this.x = -50;
 		}
-		this.x += 0.05;
+		this.x += 0.1*deltaTime/100;
 	}
 	else{
 		if(this.x <= -50){
 			this.x = 50;
 		}
-		this.x -= 0.05;
+		this.x -= 0.1*deltaTime/100;
 	}
 
 }

@@ -13,6 +13,9 @@
  	this.lastTime = 0;
     this.firstTime = 0;
 
+    var d = new Date();
+	this.startTime = d.getTime();
+
 	this.right = 1;
 	
     this.fishTexture = new CGFappearance(this.scene);
@@ -65,6 +68,8 @@
  };
 
  MyFish.prototype.update = function(currTime) {
+ 	var deltaTime = currTime - this.startTime;
+ 	this.startTime = currTime;
  	if(this.firstTime === 0){
  		this.firstTime = 1;
  	}
@@ -72,6 +77,6 @@
 		if(this.x >= 20){
 			this.x = -10;
 		}
-		this.x += 0.2;
+		this.x += 0.15*deltaTime/100;
  	}
 }

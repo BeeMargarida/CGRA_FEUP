@@ -195,10 +195,10 @@ MySubmarine.prototype.update = function(currTime) {
 	this.prop1.updateLeft(deltaTime, this.speed);
 	this.prop2.updateRight(deltaTime, this.speed);
     if(this.a === true){
-		this.angle += 5*Math.PI/180;
+		this.angle += 5*Math.PI/180*deltaTime/100;
     }
     if(this.d === true){
-        this.angle -= 5*Math.PI/180;
+        this.angle -= 5*Math.PI/180*deltaTime/100;
     }
     if(this.w === true){
     	this.speed += 0.05*this.scene.speed*deltaTime/100;
@@ -209,20 +209,20 @@ MySubmarine.prototype.update = function(currTime) {
         this.speed -= 0.05*this.scene.speed*deltaTime/100;
     }
     if(this.p === true){
-    	this.peri.elevatePeriscope();
+    	this.peri.elevatePeriscope(deltaTime/100);
     }
     if(this.l === true){
-    	 this.peri.lowerPeriscope();
+    	 this.peri.lowerPeriscope(deltaTime/100);
     }
     if(this.q === true && this.vertAngle < 80*degToRad){
-    	this.vertAngle += 5*Math.PI/180;
+    	this.vertAngle += 5*Math.PI/180*deltaTime/100;
     }
     if(this.e === true && this.vertAngle > -80*degToRad){
-    	this.vertAngle -= 5*Math.PI/180;
+    	this.vertAngle -= 5*Math.PI/180*deltaTime/100;
     }
-    this.x -= this.speed*Math.sin(this.angle);
-    this.y += this.speed*Math.sin(this.vertAngle);
-    this.z -= this.speed*Math.cos(this.angle);
+    this.x -= this.speed*Math.sin(this.angle)*deltaTime/100;
+    this.y += this.speed*Math.sin(this.vertAngle)*deltaTime/100;
+    this.z -= this.speed*Math.cos(this.angle)*deltaTime/100;
 	
 	if(this.createTorpedo === true){
 		this.temp = new MyTorpedo(this.scene,this.x,this.y,this.z,this.angle,this.vertAngle);
@@ -235,7 +235,7 @@ MySubmarine.prototype.update = function(currTime) {
 	   	this.scene.targtorpRatio -= 1;
 	}
     for(var i = 0; i < this.torpedo.length; i++){
-    	this.torpedo[i].update();
+    	this.torpedo[i].update(currTime);
     	if(this.torpedo[i].x <= 0.5+this.scene.targets[this.torpedo[i].targetInd].x &&
     	   this.torpedo[i].x >= -0.5+this.scene.targets[this.torpedo[i].targetInd].x &&
     	   this.torpedo[i].y <= 0.5+this.scene.targets[this.torpedo[i].targetInd].y &&

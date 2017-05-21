@@ -6,6 +6,8 @@ function MyPeriscope(scene){
 	
 	this.y = 0;
 
+	this.first = 0;
+
 	this.pole = new MyCylinder(this.scene, 8,7);
     this.top = new MyCylinder(this.scene,8,7);
 	this.glass = new MyCircle(this.scene,8);
@@ -46,12 +48,12 @@ MyPeriscope.prototype.display = function () {
     this.scene.popMatrix();
 }
 
-MyPeriscope.prototype.lowerPeriscope = function () {
+MyPeriscope.prototype.lowerPeriscope = function (currTime) {
 	if(this.y >= -0.4)
-		this.y -= 0.1;
+		this.y -= 0.1*currTime;
 }
 
-MyPeriscope.prototype.elevatePeriscope = function () {
+MyPeriscope.prototype.elevatePeriscope = function (currTime) {
 	if(this.y <= 1.9)
-		this.y += 0.1;
+		this.y += 0.1*currTime;
 }

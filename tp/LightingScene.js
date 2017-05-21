@@ -80,7 +80,7 @@ LightingScene.prototype.init = function(application) {
 	
 
 	this.enableTextures(true);
-	this.setUpdatePeriod(100);
+	this.setUpdatePeriod(1/60*100);
 };
 
 LightingScene.prototype.initCameras = function() {
